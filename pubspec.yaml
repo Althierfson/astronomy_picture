@@ -12,12 +12,21 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  dartz: ^0.10.1
+  internet_connection_checker: ^1.0.0+1
+  http: ^0.13.5
+  equatable: ^2.0.5
+  mockito: ^5.4.0
+  get_it: ^7.3.0
+  video_player: ^2.6.1
+  youtube_player_flutter: ^8.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   change_app_package_name: ^1.1.0
+  build_runner: ^2.3.3
 
 flutter:
 

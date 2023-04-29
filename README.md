@@ -1,16 +1,17 @@
-# astronomy_picture
+# Astronomy Picture
 
-A new Flutter project.
+Explore o universo com o nosso app! A cada dia uma nova imagem incrível do espaço, informações detalhadas e curiosidades da NASA na palma da sua mão.
 
-## Getting Started
+Nesse APP que se comunica com a API [Apod](https://api.nasa.gov/) da nasa você pode ver qual a imagem do espaço a Nasa esta destacando, pode ver seu título, descrição e curiosidades sobre a imagem.
 
-This project is a starting point for a Flutter application.
+Você também pode ver imagens aleatórias e, caso queira, pode ver qual era a imagem em destaque de um dia especifico.
 
-A few resources to get you started if this is your first Flutter project:
+## Sobre esse projeto (Técnico)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Aqui é mostrado as técnicas e ferramentas de desenvolvimento usadas nesse projeto.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter/dart
+- Clean Architecture
+- TDD (Test Driven Development)
+- Bloc (Sem Dependências)
+- API RESTful
