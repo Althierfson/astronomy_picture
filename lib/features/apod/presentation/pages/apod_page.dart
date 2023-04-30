@@ -57,8 +57,8 @@ class _ApodPageState extends State<ApodPage> {
                                 lastDate: DateTime.now())
                             .then((value) => value == null
                                 ? () {}
-                                : _bloc.input
-                                    .add(GetApodFromDateEvent(date: value)));
+                                : _bloc.input.add(GetApodFromDateEvent(
+                                    date: DateTime(2022, 12, 4))));
                         // DateTime(2022, 12, 4)
                       }),
                   ApodButton(

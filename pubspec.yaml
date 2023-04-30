@@ -20,6 +20,9 @@ dependencies:
   get_it: ^7.3.0
   video_player: ^2.6.1
   youtube_player_flutter: ^8.1.2
+  vimeo_video_player: ^0.0.9
+  url_launcher: ^6.1.10
+  flutter_local_notifications: ^14.0.0+1
 
 dev_dependencies:
   flutter_test:
