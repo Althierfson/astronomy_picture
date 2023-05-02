@@ -3,7 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ApodImage extends StatelessWidget {
   final String url;
-  const ApodImage({super.key, required this.url});
+  final String hdurl;
+  const ApodImage({super.key, required this.url, required this.hdurl});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,7 @@ class ApodImage extends StatelessWidget {
           children: [
             TextButton.icon(
                 onPressed: () {
-                  launchUrl(Uri.parse(url),
-                      mode: LaunchMode.externalApplication);
+                  launchUrl(Uri.parse(hdurl), mode: LaunchMode.externalApplication);
                 },
                 icon: const Icon(Icons.open_in_browser),
                 label: const Text("Open Image in Browser")),

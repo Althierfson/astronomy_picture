@@ -13,7 +13,12 @@ class ShowApod extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        checkMediaType() ? ApodImage(url: apod.url) : ApodVideo(url: apod.url),
+        checkMediaType()
+            ? ApodImage(
+                url: apod.url,
+                hdurl: apod.hdurl ?? apod.url,
+              )
+            : ApodVideo(url: apod.url),
         Padding(
           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
           child: Row(
