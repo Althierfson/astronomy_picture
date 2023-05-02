@@ -24,6 +24,7 @@ O aplicativo é capaz de:
 - Exibir imagem ou vídeo do dia e sua descrição vindo da API APOD;
 - Exibir imagens ou vídeos aleatorios com suas descrições vindo da API APOD;
 - Exibir imagens ou vídeos e suas descrições baseados em um dia especifico vindo da API APOD;
+- Exibir notificações diárias convidando o usuário a visitar o APP
 
 ## Como executar
 1. Clone o repositório;
