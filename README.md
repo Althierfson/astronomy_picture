@@ -42,7 +42,7 @@ O projeto segue a seguinte estrutura:
     - presentation: camada de aplicação, onde estão as classes de apresentação, views e blocos.
 
 ## Testes
-O projeto segue uma abordagem de TDD, com testes unitários e integrados em todas as camadas. Os testes podem ser encontrados no diretório test.
+O projeto segue uma abordagem de TDD, com testes unitários em todas as camadas. Os testes podem ser encontrados no diretório test.
 
 ## Autor
 Althierfson Tullio
