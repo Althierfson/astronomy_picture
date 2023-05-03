@@ -24,10 +24,14 @@ class ShowApod extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                apod.title,
-                style: const TextStyle(
-                    color: Color(0xFF0b3d91), fontWeight: FontWeight.bold),
+              Container(
+                padding: const EdgeInsets.only(right: 5.0),
+                width: MediaQuery.of(context).size.width * 0.80,
+                child: Text(
+                  apod.title,
+                  style: const TextStyle(
+                      color: Color(0xFF0b3d91), fontWeight: FontWeight.bold),
+                ),
               ),
               IconButton(
                   onPressed: () {
@@ -84,9 +88,13 @@ class ShowApod extends StatelessWidget {
               const Icon(
                 Icons.copyright,
               ),
-              Text(
-                "copyright: ${apod.copyright}",
-                style: const TextStyle(color: Color(0xFF212121)),
+              Container(
+                padding: const EdgeInsets.only(left: 5.0),
+                width: MediaQuery.of(context).size.width * 0.80,
+                child: Text(
+                  "Copyright: ${apod.copyright}",
+                  style: const TextStyle(color: Color(0xFF212121)),
+                ),
               ),
             ],
           ),

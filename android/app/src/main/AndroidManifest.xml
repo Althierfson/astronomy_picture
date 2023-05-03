@@ -2,7 +2,7 @@
     package="com.cajuapps.astronomy_picture">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="astronomy_picture"
+        android:label="Astronomy Picture"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

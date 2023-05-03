@@ -44,6 +44,9 @@ O projeto segue a seguinte estrutura:
 ## Testes
 O projeto segue uma abordagem de TDD, com testes unitários em todas as camadas. Os testes podem ser encontrados no diretório test.
 
+## Limitações atuais
+Esse projeto foi configurado e unicamente testado em ambientes android.
+
 ## Autor
 Althierfson Tullio
 

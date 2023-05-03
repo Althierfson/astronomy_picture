@@ -4,11 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-
-import 'notifications_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<FlutterLocalNotificationsPlugin>()])
 void main() {
@@ -49,9 +46,6 @@ void main() {
     tz.setLocalLocation(tz.getLocation('Australia/Sydney'));
     final tz.TZDateTime scheduledDate =
         tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5));
-    const AndroidNotificationDetails androidNotificationDetails =
-        AndroidNotificationDetails('channelId', 'channelName',
-            channelDescription: 'channelDescription');
 
     await notifications.scheduleDailyNotification(
         id: 1,

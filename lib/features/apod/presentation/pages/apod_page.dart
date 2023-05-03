@@ -53,12 +53,12 @@ class _ApodPageState extends State<ApodPage> {
                                 context: context,
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime.now()
-                                    .subtract(const Duration(days: 365)),
+                                    .subtract(const Duration(days: 3650)),
                                 lastDate: DateTime.now())
                             .then((value) => value == null
                                 ? () {}
-                                : _bloc.input.add(GetApodFromDateEvent(
-                                    date: DateTime(2022, 12, 4))));
+                                : _bloc.input
+                                    .add(GetApodFromDateEvent(date: value)));
                         // DateTime(2022, 12, 4)
                       }),
                   ApodButton(
