@@ -5,7 +5,15 @@ import 'package:astronomy_picture/features/apod/data/datasources/abstract/apod_r
 import 'package:astronomy_picture/features/apod/data/models/apod_model.dart';
 import 'package:http/http.dart' as http;
 
-const String apiKey = "em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua";
+/// Environment file with NASA API key
+/// You have to create the file in the lib directory
+/// You also need to create a String constant with your API key
+/// See this link https://api.nasa.gov/ how to get your key
+/// 
+/// Example of the constant you have to create
+/// 
+/// const String apiKey = "your_key";
+import 'package:astronomy_picture/environment.dart';
 
 class ApodRemoteDataSourceImpl implements ApodRemoteDataSource {
   final http.Client client;
