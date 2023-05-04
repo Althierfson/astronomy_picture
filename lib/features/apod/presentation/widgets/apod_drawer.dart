@@ -12,9 +12,11 @@ class ApodDrawer extends StatelessWidget {
         children: [
           DrawerHeader(child: Image.asset("assets/icon.png")),
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/aboutApp');
+            },
             label: const Text("About APP"),
-            icon: const Icon(Icons.more),
+            icon: const Icon(Icons.info_outline),
           )
         ],
       ),

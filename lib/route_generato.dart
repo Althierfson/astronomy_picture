@@ -1,3 +1,4 @@
+import 'package:astronomy_picture/core/pages/about_app.dart';
 import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
 import 'package:astronomy_picture/features/apod/presentation/pages/apod_date_page.dart';
 import 'package:astronomy_picture/features/apod/presentation/pages/apod_list_page.dart';
@@ -25,6 +26,8 @@ class RouteGenerato {
         return (_) => const ApodTodayPage();
       case '/apodDate':
         return (_) => const ApodDatePage();
+      case '/aboutApp':
+        return (_) => const AboutAppPage();
       default:
         return (_) => _errorPage();
     }
