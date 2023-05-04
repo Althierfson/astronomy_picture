@@ -22,14 +22,20 @@ Tecnologias utilizadas
 O aplicativo é capaz de:
 
 - Exibir imagem ou vídeo do dia e sua descrição vindo da API APOD;
-- Exibir imagens ou vídeos aleatorios com suas descrições vindo da API APOD;
+- Listar imagens ou vídeos aleatorios com suas descrições vindo da API APOD em uma infinite scroll view;
 - Exibir imagens ou vídeos e suas descrições baseados em um dia especifico vindo da API APOD;
 - Exibir notificações diárias convidando o usuário a visitar o APP
 
 ## Como executar
 1. Clone o repositório;
-2. Abra o terminal na pasta do projeto e execute o comando ```flutter pub get``` para instalar as dependências;
-3. Execute a aplicação com o comando ```flutter run```.
+2. Nasa API Key:
+
+      Antes de executar você precisa criar um arquivo '/environment.dart' no diretório '/lib/'
+      Esse arquivo deve conter um String com a sua chave de acesso a API da Nasa
+      Veja esse link em [Nasa API](https://api.nasa.gov/) para gerar sua chave
+
+3. Abra o terminal na pasta do projeto e execute o comando ```flutter pub get``` para instalar as dependências;
+4. Execute a aplicação com o comando ```flutter run```.
 
 ## Estrutura do projeto
 O projeto segue a seguinte estrutura:
@@ -52,3 +58,12 @@ Althierfson Tullio
 
 ## Licença
 Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para obter mais informações.
+
+## Informações Importantes
+Esse aplicativo é uma plataforma que utiliza a API APOD da NASA para exibir imagens e vídeos incríveis do espaço sideral. É importante destacar que a NASA não possui qualquer relação com o aplicativo, visto que as informações são fornecidas de forma aberta e livre para qualquer um que deseje acessá-las através da API.
+
+O aplicativo busca organizar e fornecer um meio fácil de acesso a esses dados, para que os usuários possam explorar e se encantar com o que o espaço tem a oferecer.
+
+Ressaltamos que algumas imagens e vídeos podem estar sujeitos a direitos autorais, por isso é importante consultar os direitos de uso antes de utilizar qualquer conteúdo encontrado no aplicativo.
+
+Para mais informações sobre a API APOD da NASA, acesse https://api.nasa.gov/."
