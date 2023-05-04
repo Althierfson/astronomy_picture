@@ -1,6 +1,7 @@
 import 'package:astronomy_picture/container_injection.dart';
 import 'package:astronomy_picture/core/util/notifications.dart';
 import 'package:astronomy_picture/route_generato.dart';
+import 'package:astronomy_picture/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -22,6 +23,7 @@ class AstronomyPicture extends StatelessWidget {
       title: 'Astronomy Picture',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: getIt<RouteGenerato>().generateRoute,
+      theme: PersonalTheme().theme,
       initialRoute: '/',
     );
   }
