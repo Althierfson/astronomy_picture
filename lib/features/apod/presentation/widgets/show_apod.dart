@@ -20,80 +20,89 @@ class ShowApod extends StatelessWidget {
               )
             : ApodVideo(url: apod.url),
         Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(right: 5.0),
-                width: MediaQuery.of(context).size.width * 0.80,
-                child: Text(
-                  apod.title,
-                  style: const TextStyle(
-                      color: Color(0xFF0b3d91), fontWeight: FontWeight.bold),
-                ),
-              ),
-              IconButton(
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: apod.title));
-                  },
-                  icon: const Icon(
-                    Icons.copy,
-                    color: Color(0xFF0b3d91),
-                  ))
-            ],
-          ),
-        ),
-        Text(
-          "Date: ${apod.date.month}/${apod.date.day}/${apod.date.year}",
-          style: const TextStyle(color: Color(0xFF0b3d91)),
-        ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        Container(
-          width: double.infinity,
-          alignment: Alignment.topLeft,
-          padding: const EdgeInsets.all(5.0),
-          decoration:
-              BoxDecoration(border: Border.all(color: const Color(0xFF212121))),
-          child: Stack(
-            alignment: Alignment.topRight,
+          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 40.0),
-                child: Text(
-                  apod.explanation,
-                  style: const TextStyle(
-                      color: Color(0xFF212121),
-                      decoration: TextDecoration.none),
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(right: 5.0),
+                      width: MediaQuery.of(context).size.width * 0.80,
+                      child: Text(
+                        apod.title,
+                        style: const TextStyle(
+                            color: Color(0xFF0b3d91),
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Clipboard.setData(ClipboardData(text: apod.title));
+                        },
+                        icon: const Icon(
+                          Icons.copy,
+                          color: Color(0xFF0b3d91),
+                        ))
+                  ],
                 ),
               ),
-              IconButton(
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: apod.explanation));
-                  },
-                  icon: const Icon(
-                    Icons.copy,
-                    color: Color(0xFF0b3d91),
-                  ))
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.copyright,
+              Text(
+                "Date: ${apod.date.month}/${apod.date.day}/${apod.date.year}",
+                style: const TextStyle(color: Color(0xFF0b3d91)),
+              ),
+              const SizedBox(
+                height: 8.0,
               ),
               Container(
-                padding: const EdgeInsets.only(left: 5.0),
-                width: MediaQuery.of(context).size.width * 0.80,
-                child: Text(
-                  "Copyright: ${apod.copyright}",
-                  style: const TextStyle(color: Color(0xFF212121)),
+                width: double.infinity,
+                alignment: Alignment.topLeft,
+                padding: const EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFF212121))),
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 40.0),
+                      child: Text(
+                        apod.explanation,
+                        style: const TextStyle(
+                            color: Color(0xFF212121),
+                            decoration: TextDecoration.none),
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Clipboard.setData(
+                              ClipboardData(text: apod.explanation));
+                        },
+                        icon: const Icon(
+                          Icons.copy,
+                          color: Color(0xFF0b3d91),
+                        ))
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.80,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.copyright,
+                      ),
+                      Text(
+                        "Copyright: ${apod.copyright}",
+                        style: const TextStyle(color: Color(0xFF212121)),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

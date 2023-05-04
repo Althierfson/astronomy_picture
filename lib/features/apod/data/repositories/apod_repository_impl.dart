@@ -15,26 +15,40 @@ class ApodRepositoryImpl implements ApodRepository {
 
   @override
   Future<Either<Failure, Apod>> getApodFromDate(DateTime date) async {
-    return await callRemoteDataSource(
+    return await _callRemoteDataSource(
         () => remoteDataSource.getApodFromDate(date));
   }
 
   @override
   Future<Either<Failure, Apod>> getRandomApod() async {
-    return await callRemoteDataSource(() => remoteDataSource.getRandomApod());
+    return await _callRemoteDataSource(() => remoteDataSource.getRandomApod());
   }
 
   @override
   Future<Either<Failure, Apod>> getTodayApod() async {
-    return await callRemoteDataSource(() => remoteDataSource.getTodayApod());
+    return await _callRemoteDataSource(() => remoteDataSource.getTodayApod());
   }
 
-  Future<Either<Failure, Apod>> callRemoteDataSource(
+  Future<Either<Failure, Apod>> _callRemoteDataSource(
       Future<ApodModel> Function() func) async {
     if (await networkInfo.isConnected) {
       try {
         final apod = await func();
         return Right(apod.toEntity());
+      } on Failure catch (failure) {
+        return Left(failure);
+      }
+    } else {
+      return Left(NoConnection());
+    }
+  }
+  
+  @override
+  Future<Either<Failure, List<Apod>>> fetchApod() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final apod = await remoteDataSource.fetchApod();
+        return Right(List.from(apod.map((e) => e.toEntity())));
       } on Failure catch (failure) {
         return Left(failure);
       }

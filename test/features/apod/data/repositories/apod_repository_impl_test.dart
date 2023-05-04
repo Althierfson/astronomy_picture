@@ -31,7 +31,8 @@ void main() {
   group('function getTodayApod', () {
     test("Should return an Apod entity on the Right side of Either", () async {
       when(networkInfo.isConnected).thenAnswer((_) async => true);
-      when(remoteDataSource.getTodayApod()).thenAnswer((_) async => tApodModel());
+      when(remoteDataSource.getTodayApod())
+          .thenAnswer((_) async => tApodModel());
 
       final result = await repository.getTodayApod();
 
@@ -64,7 +65,8 @@ void main() {
   group('function getRandonApod', () {
     test("Should return an Apod entity on the Right side of Either", () async {
       when(networkInfo.isConnected).thenAnswer((_) async => true);
-      when(remoteDataSource.getRandomApod()).thenAnswer((_) async => tApodModel());
+      when(remoteDataSource.getRandomApod())
+          .thenAnswer((_) async => tApodModel());
 
       final result = await repository.getRandomApod();
 
@@ -97,7 +99,8 @@ void main() {
   group('function getApodFromDate', () {
     test("Should return an Apod entity on the Right side of Either", () async {
       when(networkInfo.isConnected).thenAnswer((_) async => true);
-      when(remoteDataSource.getApodFromDate(any)).thenAnswer((_) async => tApodModel());
+      when(remoteDataSource.getApodFromDate(any))
+          .thenAnswer((_) async => tApodModel());
 
       final result = await repository.getApodFromDate(tDateTime());
 
@@ -122,6 +125,45 @@ void main() {
       final result = await repository.getApodFromDate(tDateTime());
 
       verifyNever(remoteDataSource.getApodFromDate(tDateTime()));
+
+      expect(result, Left<Failure, Apod>(tNoConnection));
+    });
+  });
+
+  group('function fetchApod', () {
+    test("Should return a list of Apod entity on the Right side of Either",
+        () async {
+      when(networkInfo.isConnected).thenAnswer((_) async => true);
+      when(remoteDataSource.fetchApod())
+          .thenAnswer((_) async => tListApodModel());
+
+      final result = await repository.fetchApod();
+
+      result.fold((l) {
+        expect(l, 1);
+      }, (r) {
+        expect(r, tListApod());
+      });
+    });
+
+    test(
+        "Should return an Failure entity throw by remoteDataDource on the Lefth side of Either",
+        () async {
+      when(networkInfo.isConnected).thenAnswer((_) async => true);
+      when(remoteDataSource.fetchApod()).thenThrow(tApiFailure);
+
+      final result = await repository.fetchApod();
+
+      expect(result, Left<Failure, Apod>(tApiFailure));
+    });
+
+    test("Should return an NoConnection entity on the Lefth side of Either",
+        () async {
+      when(networkInfo.isConnected).thenAnswer((_) async => false);
+
+      final result = await repository.fetchApod();
+
+      verifyNever(remoteDataSource.fetchApod());
 
       expect(result, Left<Failure, Apod>(tNoConnection));
     });

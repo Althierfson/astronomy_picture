@@ -1,4 +1,5 @@
 import 'package:astronomy_picture/core/failure.dart';
+import 'package:astronomy_picture/features/apod/domain/usecases/fetch_apod.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_from_date.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_random_apod.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_today_apod.dart';
@@ -14,22 +15,26 @@ import 'apod_bloc_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<GetTodayApod>(),
   MockSpec<GetRandomApod>(),
-  MockSpec<GetApodFromDate>()
+  MockSpec<GetApodFromDate>(),
+  MockSpec<FetchApod>()
 ])
 void main() {
   late MockGetTodayApod getTodayApod;
   late MockGetRandomApod getRandomApod;
   late MockGetApodFromDate getApodFromDate;
+  late MockFetchApod fetchApod;
   late ApodBloc apodBloc;
 
   setUp(() {
     getTodayApod = MockGetTodayApod();
     getRandomApod = MockGetRandomApod();
     getApodFromDate = MockGetApodFromDate();
+    fetchApod = MockFetchApod();
     apodBloc = ApodBloc(
         getTodayApod: getTodayApod,
         getRandomApod: getRandomApod,
-        getApodFromDate: getApodFromDate);
+        getApodFromDate: getApodFromDate,
+        fetchApod: fetchApod);
   });
 
   final tSuccessStremList = [
@@ -121,6 +126,36 @@ void main() {
       when(getApodFromDate(any)).thenAnswer((_) async => Left(NoConnection()));
 
       apodBloc.input.add(tGetApodFromDateEvent);
+
+      expect(apodBloc.stream, emitsInOrder(tNoConnectionStremList));
+    });
+  });
+
+  group("usecase - FetchApod", () {
+    final tSuccessStremApodList = [
+    LoadingApodState(),
+    SuccessListApodState(list: tListApod())
+  ];
+    test("Should emit LoadingApodState and SuccessListApodState", () {
+      when(fetchApod(any)).thenAnswer((_) async => Right(tListApod()));
+
+      apodBloc.input.add(FetchApodEvent());
+
+      expect(apodBloc.stream, emitsInOrder(tSuccessStremApodList));
+    });
+
+    test("Should emit LoadingApodState and ErrorApodState", () {
+      when(fetchApod(any)).thenAnswer((_) async => Left(ApiFailure()));
+
+      apodBloc.input.add(FetchApodEvent());
+
+      expect(apodBloc.stream, emitsInOrder(tApiFailureStremList));
+    });
+
+    test("Should emit LoadingApodState and ErrorApodState", () {
+      when(fetchApod(any)).thenAnswer((_) async => Left(NoConnection()));
+
+      apodBloc.input.add(FetchApodEvent());
 
       expect(apodBloc.stream, emitsInOrder(tNoConnectionStremList));
     });

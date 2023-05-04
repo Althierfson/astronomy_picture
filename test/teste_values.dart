@@ -22,3 +22,7 @@ ApodModel Function() tApodModel = () => ApodModel(
     title: "The Great Nebula in Orion",
     url: "https://apod.nasa.gov/apod/image/0409/orion_seip.jpg",
     hdurl: "https://apod.nasa.gov/apod/image/0409/orion_seip_big.jpg");
+
+List<Apod> Function() tListApod = () => [tApod(), tApod(), tApod()];
+
+List<ApodModel> Function() tListApodModel = () => [tApodModel(), tApodModel(), tApodModel()];

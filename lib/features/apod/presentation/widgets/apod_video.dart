@@ -6,7 +6,8 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ApodVideo extends StatefulWidget {
   final String url;
-  const ApodVideo({super.key, required this.url});
+  final bool showOptions;
+  const ApodVideo({super.key, required this.url, this.showOptions = true});
 
   @override
   State<ApodVideo> createState() => _ApodVideoState();
@@ -14,6 +15,7 @@ class ApodVideo extends StatefulWidget {
 
 class _ApodVideoState extends State<ApodVideo> {
   late String url;
+  late bool showOptions;
   late VideoPlayerController _videoController;
   late YoutubePlayerController _youtubeController;
   VideoPlataform videoPlataform = VideoPlataform.stand;
@@ -21,6 +23,7 @@ class _ApodVideoState extends State<ApodVideo> {
   @override
   void initState() {
     url = widget.url; // "https://vimeo.com/70591644";
+    showOptions = widget.showOptions;
     checkVideoPlataform();
     super.initState();
   }
@@ -81,18 +84,20 @@ class _ApodVideoState extends State<ApodVideo> {
     return Column(
       children: [
         videoWidget,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            TextButton.icon(
-                onPressed: () {
-                  launchUrl(Uri.parse(url),
-                      mode: LaunchMode.externalApplication);
-                },
-                icon: const Icon(Icons.open_in_browser),
-                label: const Text("Open video in Browser or APP")),
-          ],
-        )
+        showOptions
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  TextButton.icon(
+                      onPressed: () {
+                        launchUrl(Uri.parse(url),
+                            mode: LaunchMode.externalApplication);
+                      },
+                      icon: const Icon(Icons.open_in_browser),
+                      label: const Text("Open video in Browser or APP")),
+                ],
+              )
+            : Container()
       ],
     );
   }

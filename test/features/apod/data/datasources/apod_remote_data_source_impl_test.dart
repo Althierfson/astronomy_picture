@@ -124,4 +124,38 @@ void main() {
           'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&date=2023-3-22')));
     });
   });
+
+  group("Function fetchApod", () {
+    test("Should return a list Apod model", () async {
+      http.Response tResponseSuccessList =  http.Response.bytes(utf8.encode(fixture('image_list.json')), 200);
+      when(client.get(any)).thenAnswer((_) async => tResponseSuccessList);
+
+      final result = await remoteDataSource.fetchApod();
+
+      verify(client.get(Uri.parse(
+          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&count=20')));
+
+      expect(result, tListApodModel());
+    });
+
+    test("Should throw an ApiFailure when API no return 200", () async {
+      when(client.get(any)).thenAnswer((_) async => tResponseFailure);
+
+      expect(
+          () => remoteDataSource.fetchApod(), throwsA(isA<ApiFailure>()));
+
+      verify(client.get(Uri.parse(
+          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&count=20')));
+    });
+
+    test("Should throw an ApiFailure when happen a exception", () async {
+      when(client.get(any)).thenThrow(const SocketException("message"));
+
+      expect(
+          () => remoteDataSource.fetchApod(), throwsA(isA<ApiFailure>()));
+
+      verify(client.get(Uri.parse(
+          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&count=20')));
+    });
+  });
 }

@@ -19,3 +19,5 @@ class GetApodFromDateEvent extends ApodEvent {
   @override
   List<Object> get props => [date];
 }
+
+class FetchApodEvent extends ApodEvent {}

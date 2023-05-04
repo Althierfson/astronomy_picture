@@ -11,6 +11,8 @@ import 'package:astronomy_picture/features/apod/domain/entities/apod.dart'
     as _i7;
 import 'package:astronomy_picture/features/apod/domain/repositories/apod_repository.dart'
     as _i2;
+import 'package:astronomy_picture/features/apod/domain/usecases/fetch_apod.dart'
+    as _i11;
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_from_date.dart'
     as _i10;
 import 'package:astronomy_picture/features/apod/domain/usecases/get_random_apod.dart'
@@ -181,4 +183,48 @@ class MockGetApodFromDate extends _i1.Mock implements _i10.GetApodFromDate {
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>>);
+}
+
+/// A class which mocks [FetchApod].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFetchApod extends _i1.Mock implements _i11.FetchApod {
+  @override
+  _i2.ApodRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeApodRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeApodRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.ApodRepository);
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>> call(
+          _i8.NoParameter? parameter) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [parameter],
+        ),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>>.value(
+            _FakeEither_1<_i6.Failure, List<_i7.Apod>>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>>.value(
+                _FakeEither_1<_i6.Failure, List<_i7.Apod>>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>>);
 }

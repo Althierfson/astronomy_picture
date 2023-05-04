@@ -28,3 +28,12 @@ class ErrorApodState extends ApodState {
   @override
   List<Object> get props => [msg];
 }
+
+class SuccessListApodState extends ApodState {
+  final List<Apod> list;
+
+  const SuccessListApodState({required this.list});
+
+  @override
+  List<Object> get props => [list];
+}

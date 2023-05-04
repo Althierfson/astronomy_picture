@@ -114,4 +114,29 @@ class MockApodRepository extends _i1.Mock implements _i3.ApodRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Apod>>);
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.Apod>>> fetchApod() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchApod,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, List<_i6.Apod>>>.value(
+            _FakeEither_0<_i5.Failure, List<_i6.Apod>>(
+          this,
+          Invocation.method(
+            #fetchApod,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, List<_i6.Apod>>>.value(
+                _FakeEither_0<_i5.Failure, List<_i6.Apod>>(
+          this,
+          Invocation.method(
+            #fetchApod,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.Apod>>>);
 }

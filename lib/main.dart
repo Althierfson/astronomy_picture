@@ -1,6 +1,6 @@
 import 'package:astronomy_picture/container_injection.dart';
 import 'package:astronomy_picture/core/util/notifications.dart';
-import 'package:astronomy_picture/features/apod/presentation/pages/apod_page.dart';
+import 'package:astronomy_picture/route_generato.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -18,10 +18,11 @@ class AstronomyPicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     initNotifications();
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Astronomy Picture',
       debugShowCheckedModeBanner: false,
-      home: ApodPage(),
+      onGenerateRoute: getIt<RouteGenerato>().generateRoute,
+      initialRoute: '/',
     );
   }
 

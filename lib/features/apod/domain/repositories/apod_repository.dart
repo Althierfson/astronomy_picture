@@ -16,4 +16,8 @@ abstract class ApodRepository {
   /// Return a Apod date on Right side of Either case is a success, otherwise
   /// Return a Failure on Left side of Either
   Future<Either<Failure, Apod>> getRandomApod();
+
+  /// Return a list of Apod date on Right side of Either case is a success, otherwise
+  /// Return a Failure on Left side of Either
+  Future<Either<Failure, List<Apod>>> fetchApod();
 }
