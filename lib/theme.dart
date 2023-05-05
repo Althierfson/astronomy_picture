@@ -16,11 +16,11 @@ class PersonalTheme {
   ThemeData get theme => ThemeData(
       primaryColor: blue,
       primaryColorDark: blueDarker,
-      scaffoldBackgroundColor: white,
+      scaffoldBackgroundColor: spaceBlue,
       appBarTheme:
-          AppBarTheme(color: blue, iconTheme: IconThemeData(color: palePink)),
+          AppBarTheme(color: black, iconTheme: IconThemeData(color: palePink)),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: blue,
+          backgroundColor: black,
           unselectedItemColor: palePink.withOpacity(0.5),
           selectedItemColor: palePink),
       elevatedButtonTheme: ElevatedButtonThemeData(

@@ -53,7 +53,11 @@ class _ApodListPageState extends State<ApodListPage> {
         }
 
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            actions: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+            ],
+          ),
           drawer: const ApodDrawer(),
           body: RefreshIndicator(
             onRefresh: () async {
@@ -87,8 +91,6 @@ class _ApodListPageState extends State<ApodListPage> {
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.today), label: 'Picture of the day'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.date_range), label: 'Picture by date')
             ],
             onTap: (value) {
               if (value == 1) {

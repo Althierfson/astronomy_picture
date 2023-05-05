@@ -206,7 +206,10 @@ class ApodViewPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ApodVideo(url: apod.url),
+              ApodVideo(
+                url: apod.url,
+                showOptions: false,
+              ),
             ],
           ));
     }
