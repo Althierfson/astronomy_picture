@@ -1,4 +1,5 @@
 import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
+import 'package:astronomy_picture/features/apod/presentation/widgets/apod_video.dart';
 import 'package:astronomy_picture/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,16 +30,7 @@ class ApodViewPage extends StatelessWidget {
               Stack(
                 alignment: Alignment.topCenter,
                 children: [
-                  Container(
-                    height: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(apod.url),
-                            fit: BoxFit.fitHeight),
-                        borderRadius: BorderRadius.circular(30.0),
-                        border: Border.all(
-                            color: PersonalTheme.white.withOpacity(.5))),
-                  ),
+                  checkMediaType(context),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30.0, 350.0, 30.0, 0.0),
                     child: Container(
@@ -191,12 +183,32 @@ class ApodViewPage extends StatelessWidget {
     showSnackBar(context, msg);
   }
 
-  bool checkMediaType() {
-    // return true for image and false for video
+  Widget checkMediaType(BuildContext context) {
     if (apod.mediaType == "image") {
-      return true;
+      return Container(
+        height: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(apod.url), fit: BoxFit.fitHeight),
+            borderRadius: BorderRadius.circular(30.0),
+            border: Border.all(color: PersonalTheme.white.withOpacity(.5))),
+      );
     } else {
-      return false;
+      return Container(
+          height: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(apod.thumbnailUrl ??
+                      "https://spaceplace.nasa.gov/gallery-space/en/NGC2336-galaxy.en.jpg"),
+                  fit: BoxFit.fitHeight),
+              borderRadius: BorderRadius.circular(30.0),
+              border: Border.all(color: PersonalTheme.white.withOpacity(.5))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ApodVideo(url: apod.url),
+            ],
+          ));
     }
   }
 

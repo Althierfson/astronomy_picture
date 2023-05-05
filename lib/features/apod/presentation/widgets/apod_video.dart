@@ -22,7 +22,7 @@ class _ApodVideoState extends State<ApodVideo> {
 
   @override
   void initState() {
-    url = widget.url; // "https://vimeo.com/70591644";
+    url = "https://vimeo.com/70591644";
     showOptions = widget.showOptions;
     checkVideoPlataform();
     super.initState();
