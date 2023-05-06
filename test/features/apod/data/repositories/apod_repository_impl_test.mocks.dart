@@ -115,6 +115,23 @@ class MockApodRemoteDataSource extends _i1.Mock
         returnValueForMissingStub:
             _i4.Future<List<_i2.ApodModel>>.value(<_i2.ApodModel>[]),
       ) as _i4.Future<List<_i2.ApodModel>>);
+  @override
+  _i4.Future<List<_i2.ApodModel>> getApodByDateRange(
+    String? startDate,
+    String? endDate,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getApodByDateRange,
+          [
+            startDate,
+            endDate,
+          ],
+        ),
+        returnValue: _i4.Future<List<_i2.ApodModel>>.value(<_i2.ApodModel>[]),
+        returnValueForMissingStub:
+            _i4.Future<List<_i2.ApodModel>>.value(<_i2.ApodModel>[]),
+      ) as _i4.Future<List<_i2.ApodModel>>);
 }
 
 /// A class which mocks [NetworkInfo].

@@ -4,6 +4,7 @@ import 'package:astronomy_picture/core/failure.dart';
 import 'package:astronomy_picture/core/util/usecase.dart';
 import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/fetch_apod.dart';
+import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_by_date_range.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_from_date.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_random_apod.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_today_apod.dart';
@@ -18,12 +19,14 @@ class ApodBloc {
   GetRandomApod getRandomApod;
   GetApodFromDate getApodFromDate;
   FetchApod fetchApod;
+  GetApodByDateRange getApodByDateRange;
 
   ApodBloc(
       {required this.getTodayApod,
       required this.getRandomApod,
       required this.getApodFromDate,
-      required this.fetchApod}) {
+      required this.fetchApod,
+      required this.getApodByDateRange}) {
     _inputController.stream.listen(_mapEventToState);
   }
 
@@ -40,6 +43,10 @@ class ApodBloc {
 
     if (event is FetchApodEvent) {
       fetchApod(NoParameter()).then((value) => value.fold(
+          (l) => _outputController.add(ErrorApodState(msg: l.msg)),
+          (r) => _outputController.add(SuccessListApodState(list: r))));
+    } else if (event is GetByDateRangeApodEvent) {
+      getApodByDateRange(event.query).then((value) => value.fold(
           (l) => _outputController.add(ErrorApodState(msg: l.msg)),
           (r) => _outputController.add(SuccessListApodState(list: r))));
     } else {

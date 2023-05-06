@@ -1,4 +1,5 @@
 import 'package:astronomy_picture/container_injection.dart';
+import 'package:astronomy_picture/core/util/date_convert.dart';
 import 'package:astronomy_picture/features/apod/presentation/bloc/apod_bloc.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_tile.dart';
 import 'package:astronomy_picture/theme.dart';
@@ -9,15 +10,13 @@ class ApodSeachPage extends SearchDelegate {
   PickerDateRange choosedDate = PickerDateRange(DateTime.now(), DateTime.now());
   late ApodBloc _apodBloc;
 
-  ApodSeachPage() {
-    _apodBloc = getIt<ApodBloc>();
-  }
-
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
         textTheme: TextTheme(titleLarge: TextStyle(color: PersonalTheme.white)),
-        appBarTheme: AppBarTheme(backgroundColor: PersonalTheme.spaceBlue));
+        appBarTheme: AppBarTheme(backgroundColor: PersonalTheme.black),
+        inputDecorationTheme: InputDecorationTheme(
+            hintStyle: TextStyle(color: PersonalTheme.white)));
   }
 
   @override
@@ -49,14 +48,14 @@ class ApodSeachPage extends SearchDelegate {
                         choosedDate = dateRange;
                         if (dateRange.endDate != null) {
                           query =
-                              "${dateRange.startDate.toString().substring(0, 10)}/${dateRange.endDate.toString().substring(0, 10)}";
+                              "${DateConvert.dateToString(dateRange.startDate ?? DateTime(2023))}/${DateConvert.dateToString(dateRange.endDate ?? DateTime(2023))}";
                         } else {
-                          query =
-                              dateRange.startDate.toString().substring(0, 10);
+                          query = DateConvert.dateToString(
+                              dateRange.startDate ?? DateTime(2023));
                         }
+                        buildResults(context);
                       }
                       Navigator.pop(context);
-                      buildResults(context);
                     },
                     onCancel: () {
                       Navigator.pop(context);
@@ -88,9 +87,10 @@ class ApodSeachPage extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    _apodBloc.input.add(FetchApodEvent());
+    _apodBloc = getIt<ApodBloc>();
+    _apodBloc.input.add(GetByDateRangeApodEvent(query: query));
     return Container(
-      color: PersonalTheme.black,
+      color: PersonalTheme.spaceBlue,
       child: StreamBuilder(
         stream: _apodBloc.stream,
         builder: (context, snapshot) {
@@ -104,12 +104,29 @@ class ApodSeachPage extends SearchDelegate {
             );
           }
 
+          if (state is ErrorApodState) {
+            return Center(
+              child: Text(
+                state.msg,
+                style: TextStyle(color: PersonalTheme.white),
+                textAlign: TextAlign.center,
+              ),
+            );
+          }
+
           if (state is SuccessListApodState) {
             final list = state.list;
             return ListView.builder(
               itemCount: list.length,
-              itemBuilder: (context, index) =>
-                  ApodTile(apod: list[index], onTap: () {}),
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ApodTile(
+                    apod: list[index],
+                    onTap: () {
+                      Navigator.pushNamed(context, '/apodView',
+                          arguments: list[index]);
+                    }),
+              ),
             );
           }
 
@@ -122,7 +139,7 @@ class ApodSeachPage extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     return Container(
-      color: PersonalTheme.black,
+      color: PersonalTheme.spaceBlue,
       child: Column(
         children: [
           Padding(

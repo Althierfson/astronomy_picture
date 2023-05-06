@@ -20,4 +20,8 @@ abstract class ApodRepository {
   /// Return a list of Apod date on Right side of Either case is a success, otherwise
   /// Return a Failure on Left side of Either
   Future<Either<Failure, List<Apod>>> fetchApod();
+
+  /// Return a list of Apod date on Right side of Either case is a success, otherwise
+  /// Return a Failure on Left side of Either
+  Future<Either<Failure, List<Apod>>> getApodByDateRange(String startDate, String endDate);
 }
