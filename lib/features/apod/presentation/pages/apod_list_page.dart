@@ -1,6 +1,7 @@
 import 'package:astronomy_picture/container_injection.dart';
 import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
 import 'package:astronomy_picture/features/apod/presentation/bloc/apod_bloc.dart';
+import 'package:astronomy_picture/features/apod/presentation/pages/apod_seach_page.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_drawer.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_tile.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,11 @@ class _ApodListPageState extends State<ApodListPage> {
         return Scaffold(
           appBar: AppBar(
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+              IconButton(
+                  onPressed: () {
+                    showSearch(context: context, delegate: ApodSeachPage());
+                  },
+                  icon: const Icon(Icons.search))
             ],
           ),
           drawer: const ApodDrawer(),

@@ -2,7 +2,6 @@ import 'package:astronomy_picture/container_injection.dart';
 import 'package:astronomy_picture/features/apod/presentation/bloc/apod_bloc.dart';
 import 'package:astronomy_picture/features/apod/presentation/pages/apod_view_page.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/error_apod_widget.dart';
-import 'package:astronomy_picture/features/apod/presentation/widgets/show_apod.dart';
 import 'package:flutter/material.dart';
 
 class ApodTodayPage extends StatefulWidget {

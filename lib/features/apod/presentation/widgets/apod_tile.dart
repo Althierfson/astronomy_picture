@@ -1,5 +1,4 @@
 import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
-import 'package:astronomy_picture/features/apod/presentation/widgets/apod_image.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_video.dart';
 import 'package:astronomy_picture/theme.dart';
 import 'package:flutter/material.dart';
