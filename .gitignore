@@ -44,8 +44,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# environment
-lib/environment.dart
-
 # test
 coverage/
