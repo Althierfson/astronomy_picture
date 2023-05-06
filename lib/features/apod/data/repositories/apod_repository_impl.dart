@@ -42,12 +42,24 @@ class ApodRepositoryImpl implements ApodRepository {
       return Left(NoConnection());
     }
   }
-  
+
   @override
   Future<Either<Failure, List<Apod>>> fetchApod() async {
+    return await _getListFromDataSource(() => remoteDataSource.fetchApod());
+  }
+
+  @override
+  Future<Either<Failure, List<Apod>>> getApodByDateRange(
+      String startDate, String endDate) async {
+    return await _getListFromDataSource(
+        () => remoteDataSource.getApodByDateRange(startDate, endDate));
+  }
+
+  Future<Either<Failure, List<Apod>>> _getListFromDataSource(
+      Future<List<ApodModel>> Function() func) async {
     if (await networkInfo.isConnected) {
       try {
-        final apod = await remoteDataSource.fetchApod();
+        final apod = await func();
         return Right(List.from(apod.map((e) => e.toEntity())));
       } on Failure catch (failure) {
         return Left(failure);

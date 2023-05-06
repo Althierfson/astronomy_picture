@@ -1,5 +1,6 @@
 import 'package:astronomy_picture/core/failure.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/fetch_apod.dart';
+import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_by_date_range.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_from_date.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_random_apod.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_today_apod.dart';
@@ -16,13 +17,15 @@ import 'apod_bloc_test.mocks.dart';
   MockSpec<GetTodayApod>(),
   MockSpec<GetRandomApod>(),
   MockSpec<GetApodFromDate>(),
-  MockSpec<FetchApod>()
+  MockSpec<FetchApod>(),
+  MockSpec<GetApodByDateRange>()
 ])
 void main() {
   late MockGetTodayApod getTodayApod;
   late MockGetRandomApod getRandomApod;
   late MockGetApodFromDate getApodFromDate;
   late MockFetchApod fetchApod;
+  late MockGetApodByDateRange getApodByDateRange;
   late ApodBloc apodBloc;
 
   setUp(() {
@@ -30,11 +33,13 @@ void main() {
     getRandomApod = MockGetRandomApod();
     getApodFromDate = MockGetApodFromDate();
     fetchApod = MockFetchApod();
+    getApodByDateRange = MockGetApodByDateRange();
     apodBloc = ApodBloc(
         getTodayApod: getTodayApod,
         getRandomApod: getRandomApod,
         getApodFromDate: getApodFromDate,
-        fetchApod: fetchApod);
+        fetchApod: fetchApod,
+        getApodByDateRange: getApodByDateRange);
   });
 
   final tSuccessStremList = [
@@ -133,9 +138,9 @@ void main() {
 
   group("usecase - FetchApod", () {
     final tSuccessStremApodList = [
-    LoadingApodState(),
-    SuccessListApodState(list: tListApod())
-  ];
+      LoadingApodState(),
+      SuccessListApodState(list: tListApod())
+    ];
     test("Should emit LoadingApodState and SuccessListApodState", () {
       when(fetchApod(any)).thenAnswer((_) async => Right(tListApod()));
 
@@ -156,6 +161,36 @@ void main() {
       when(fetchApod(any)).thenAnswer((_) async => Left(NoConnection()));
 
       apodBloc.input.add(FetchApodEvent());
+
+      expect(apodBloc.stream, emitsInOrder(tNoConnectionStremList));
+    });
+  });
+
+  group("usecase - GetByDateRangeApodEvent", () {
+    final tSuccessStremApodList = [
+      LoadingApodState(),
+      SuccessListApodState(list: tListApod())
+    ];
+    test("Should emit LoadingApodState and SuccessListApodState", () {
+      when(getApodByDateRange(any)).thenAnswer((_) async => Right(tListApod()));
+
+      apodBloc.input.add(const GetByDateRangeApodEvent(query: "Query"));
+
+      expect(apodBloc.stream, emitsInOrder(tSuccessStremApodList));
+    });
+
+    test("Should emit LoadingApodState and ErrorApodState", () {
+      when(getApodByDateRange(any)).thenAnswer((_) async => Left(ApiFailure()));
+
+      apodBloc.input.add(const GetByDateRangeApodEvent(query: "Query"));
+
+      expect(apodBloc.stream, emitsInOrder(tApiFailureStremList));
+    });
+
+    test("Should emit LoadingApodState and ErrorApodState", () {
+      when(getApodByDateRange(any)).thenAnswer((_) async => Left(NoConnection()));
+
+      apodBloc.input.add(const GetByDateRangeApodEvent(query: "Query"));
 
       expect(apodBloc.stream, emitsInOrder(tNoConnectionStremList));
     });

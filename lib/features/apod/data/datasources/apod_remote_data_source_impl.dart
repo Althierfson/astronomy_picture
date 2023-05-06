@@ -57,12 +57,24 @@ class ApodRemoteDataSourceImpl implements ApodRemoteDataSource {
     }
   }
 
+  @override
+  Future<List<ApodModel>> getApodByDateRange(
+      String startDate, String endDate) async {
+    try {
+      return await _callClientManyApod(() => _makeQuery(QueryType.byDateRange,
+          endDate: endDate, startDate: startDate));
+    } on Failure {
+      rethrow;
+    }
+  }
+
   Uri _getUrl() {
     // https://api.nasa.gov/planetary/apod
     return Uri(scheme: 'https', host: 'api.nasa.gov', path: 'planetary/apod');
   }
 
-  Map<String, String> _makeQuery(QueryType queryType, {DateTime? date}) {
+  Map<String, String> _makeQuery(QueryType queryType,
+      {DateTime? date, String? startDate, String? endDate}) {
     Map<String, String> query = {'api_key': apiKey, 'thumbs': 'true'};
     switch (queryType) {
       case QueryType.standard:
@@ -79,6 +91,10 @@ class ApodRemoteDataSourceImpl implements ApodRemoteDataSource {
         }
       case QueryType.fetch:
         query['count'] = '20';
+        return query;
+      case QueryType.byDateRange:
+        query['start_date'] = startDate ?? "";
+        query['end_date'] = endDate ?? "";
         return query;
       default:
         return query;
@@ -122,5 +138,6 @@ enum QueryType {
   standard,
   random,
   fetch,
+  byDateRange,
   byDate;
 }

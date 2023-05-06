@@ -46,3 +46,6 @@ app.*.map.json
 
 # environment
 lib/environment.dart
+
+# test
+coverage/

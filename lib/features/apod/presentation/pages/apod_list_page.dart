@@ -74,12 +74,15 @@ class _ApodListPageState extends State<ApodListPage> {
               itemCount: apodList.length + 1,
               itemBuilder: (context, index) {
                 if (index < apodList.length) {
-                  return ApodTile(
-                      apod: apodList[index],
-                      onTap: () {
-                        Navigator.pushNamed(context, '/apodView',
-                            arguments: apodList[index]);
-                      });
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ApodTile(
+                        apod: apodList[index],
+                        onTap: () {
+                          Navigator.pushNamed(context, '/apodView',
+                              arguments: apodList[index]);
+                        }),
+                  );
                 } else {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 32),

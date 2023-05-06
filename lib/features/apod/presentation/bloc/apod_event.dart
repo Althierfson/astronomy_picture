@@ -21,3 +21,12 @@ class GetApodFromDateEvent extends ApodEvent {
 }
 
 class FetchApodEvent extends ApodEvent {}
+
+class GetByDateRangeApodEvent extends ApodEvent {
+  final String query;
+
+  const GetByDateRangeApodEvent({required this.query});
+
+  @override
+  List<Object> get props => [query];
+}

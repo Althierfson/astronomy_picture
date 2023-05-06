@@ -18,4 +18,8 @@ abstract class ApodRemoteDataSource {
   /// Return a [ApodModel] list date case is a success, otherwise
   /// throw a [Failure]
   Future<List<ApodModel>> fetchApod();
+
+  /// Return a [ApodModel] list date case is a success, otherwise
+  /// throw a [Failure]
+  Future<List<ApodModel>> getApodByDateRange(String startDate, String endDate);
 }

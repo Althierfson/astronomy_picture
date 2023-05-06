@@ -5,6 +5,7 @@ import 'package:astronomy_picture/features/apod/data/datasources/apod_remote_dat
 import 'package:astronomy_picture/features/apod/data/repositories/apod_repository_impl.dart';
 import 'package:astronomy_picture/features/apod/domain/repositories/apod_repository.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/fetch_apod.dart';
+import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_by_date_range.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_from_date.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_random_apod.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_today_apod.dart';
@@ -51,11 +52,13 @@ void apodFeature() {
   getIt.registerLazySingleton(() => GetRandomApod(repository: getIt()));
   getIt.registerLazySingleton(() => GetApodFromDate(repository: getIt()));
   getIt.registerLazySingleton(() => FetchApod(repository: getIt()));
+  getIt.registerLazySingleton(() => GetApodByDateRange(repository: getIt()));
 
   // bloc
   getIt.registerFactory(() => ApodBloc(
       getTodayApod: getIt(),
       getRandomApod: getIt(),
       getApodFromDate: getIt(),
-      fetchApod: getIt()));
+      fetchApod: getIt(),
+      getApodByDateRange: getIt()));
 }

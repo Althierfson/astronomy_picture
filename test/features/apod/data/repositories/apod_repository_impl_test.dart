@@ -168,4 +168,43 @@ void main() {
       expect(result, Left<Failure, Apod>(tNoConnection));
     });
   });
+
+  group('function getApodByDateRange', () {
+    test("Should return a list of Apod entity on the Right side of Either",
+        () async {
+      when(networkInfo.isConnected).thenAnswer((_) async => true);
+      when(remoteDataSource.getApodByDateRange(any, any))
+          .thenAnswer((_) async => tListApodModel());
+
+      final result = await repository.getApodByDateRange('2022-05-05', '2022-05-01');
+
+      result.fold((l) {
+        expect(l, 1);
+      }, (r) {
+        expect(r, tListApod());
+      });
+    });
+
+    test(
+        "Should return an Failure entity throw by remoteDataDource on the Lefth side of Either",
+        () async {
+      when(networkInfo.isConnected).thenAnswer((_) async => true);
+      when(remoteDataSource.getApodByDateRange(any, any)).thenThrow(tApiFailure);
+
+      final result = await repository.getApodByDateRange('2022-05-05', '2022-05-01');
+
+      expect(result, Left<Failure, Apod>(tApiFailure));
+    });
+
+    test("Should return an NoConnection entity on the Lefth side of Either",
+        () async {
+      when(networkInfo.isConnected).thenAnswer((_) async => false);
+
+      final result = await repository.getApodByDateRange('2022-05-05', '2022-05-01');
+
+      verifyNever(remoteDataSource.fetchApod());
+
+      expect(result, Left<Failure, Apod>(tNoConnection));
+    });
+  });
 }
