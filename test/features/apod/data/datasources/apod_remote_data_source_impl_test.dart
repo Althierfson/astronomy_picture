@@ -34,7 +34,7 @@ void main() {
       final result = await remoteDataSource.getTodayApod();
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true')));
 
       expect(result, tApodModel());
     });
@@ -45,7 +45,7 @@ void main() {
       expect(() => remoteDataSource.getTodayApod(), throwsA(isA<ApiFailure>()));
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true')));
     });
 
     test("Should throw an ApiFailure when happen a exception", () async {
@@ -54,7 +54,7 @@ void main() {
       expect(() => remoteDataSource.getTodayApod(), throwsA(isA<ApiFailure>()));
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true')));
     });
   });
 
@@ -66,7 +66,7 @@ void main() {
       final result = await remoteDataSource.getRandomApod();
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&count=1')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=1')));
 
       expect(result, tApodModel());
     });
@@ -78,7 +78,7 @@ void main() {
           () => remoteDataSource.getRandomApod(), throwsA(isA<ApiFailure>()));
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&count=1')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=1')));
     });
 
     test("Should throw an ApiFailure when happen a exception", () async {
@@ -88,7 +88,7 @@ void main() {
           () => remoteDataSource.getRandomApod(), throwsA(isA<ApiFailure>()));
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&count=1')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=1')));
     });
   });
 
@@ -99,7 +99,7 @@ void main() {
       final result = await remoteDataSource.getApodFromDate(tDateTime());
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&date=2023-3-22')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&date=2023-3-22')));
 
       expect(result, tApodModel());
     });
@@ -111,7 +111,7 @@ void main() {
           throwsA(isA<ApiFailure>()));
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&date=2023-3-22')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&date=2023-3-22')));
     });
 
     test("Should throw an ApiFailure when happen a exception", () async {
@@ -121,7 +121,7 @@ void main() {
           throwsA(isA<ApiFailure>()));
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&date=2023-3-22')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&date=2023-3-22')));
     });
   });
 
@@ -133,7 +133,7 @@ void main() {
       final result = await remoteDataSource.fetchApod();
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&count=20')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=20')));
 
       expect(result, tListApodModel());
     });
@@ -145,7 +145,7 @@ void main() {
           () => remoteDataSource.fetchApod(), throwsA(isA<ApiFailure>()));
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&count=20')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=20')));
     });
 
     test("Should throw an ApiFailure when happen a exception", () async {
@@ -155,7 +155,7 @@ void main() {
           () => remoteDataSource.fetchApod(), throwsA(isA<ApiFailure>()));
 
       verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua&thumbs=true&count=20')));
+          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=20')));
     });
   });
 }
