@@ -1,6 +1,7 @@
 import 'package:astronomy_picture/container_injection.dart';
 import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
 import 'package:astronomy_picture/features/apod/presentation/bloc/apod_bloc.dart';
+import 'package:astronomy_picture/features/apod/presentation/pages/apod_seach_page.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_drawer.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_tile.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,15 @@ class _ApodListPageState extends State<ApodListPage> {
         }
 
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    showSearch(context: context, delegate: ApodSeachPage());
+                  },
+                  icon: const Icon(Icons.search))
+            ],
+          ),
           drawer: const ApodDrawer(),
           body: RefreshIndicator(
             onRefresh: () async {
@@ -87,8 +96,6 @@ class _ApodListPageState extends State<ApodListPage> {
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.today), label: 'Picture of the day'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.date_range), label: 'Picture by date')
             ],
             onTap: (value) {
               if (value == 1) {
