@@ -4,6 +4,7 @@ import 'package:astronomy_picture/features/apod/presentation/bloc/apod_bloc.dart
 import 'package:astronomy_picture/features/apod/presentation/pages/apod_seach_page.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_drawer.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_tile.dart';
+import 'package:astronomy_picture/features/apod/presentation/widgets/error_apod_widget.dart';
 import 'package:flutter/material.dart';
 
 class ApodListPage extends StatefulWidget {
@@ -50,7 +51,13 @@ class _ApodListPageState extends State<ApodListPage> {
         }
 
         if (state is ErrorApodState) {
-          child = Text(state.msg);
+          child = ErrorApodWidget(
+            msg: state.msg,
+            onRetry: () {
+              apodList.clear();
+              _apodBloc.input.add(FetchApodEvent());
+            },
+          );
         }
 
         return Scaffold(
