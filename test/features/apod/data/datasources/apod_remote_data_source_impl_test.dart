@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:astronomy_picture/core/failure.dart';
 import 'package:astronomy_picture/features/apod/data/datasources/apod_remote_data_source_impl.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
@@ -22,8 +21,6 @@ void main() {
     client = MockClient();
     remoteDataSource = ApodRemoteDataSourceImpl(client: client);
   });
-
-  dotenv.testLoad(fileInput: 'API_KEY=DEMO_KEY');
 
   http.Response tResponseSuccess =
       http.Response.bytes(utf8.encode(fixture('image.json')), 200);
