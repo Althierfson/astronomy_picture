@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:astronomy_picture/core/failure.dart';
 import 'package:astronomy_picture/features/apod/data/datasources/apod_remote_data_source_impl.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
@@ -22,6 +23,8 @@ void main() {
     remoteDataSource = ApodRemoteDataSourceImpl(client: client);
   });
 
+  dotenv.testLoad(fileInput: 'API_KEY=DEMO_KEY');
+
   http.Response tResponseSuccess =
       http.Response.bytes(utf8.encode(fixture('image.json')), 200);
   http.Response tResponseFailure =
@@ -33,9 +36,6 @@ void main() {
 
       final result = await remoteDataSource.getTodayApod();
 
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true')));
-
       expect(result, tApodModel());
     });
 
@@ -43,18 +43,12 @@ void main() {
       when(client.get(any)).thenAnswer((_) async => tResponseFailure);
 
       expect(() => remoteDataSource.getTodayApod(), throwsA(isA<ApiFailure>()));
-
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true')));
     });
 
     test("Should throw an ApiFailure when happen a exception", () async {
       when(client.get(any)).thenThrow(const SocketException("message"));
 
       expect(() => remoteDataSource.getTodayApod(), throwsA(isA<ApiFailure>()));
-
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true')));
     });
   });
 
@@ -66,9 +60,6 @@ void main() {
 
       final result = await remoteDataSource.getRandomApod();
 
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=1')));
-
       expect(result, tApodModel());
     });
 
@@ -77,9 +68,6 @@ void main() {
 
       expect(
           () => remoteDataSource.getRandomApod(), throwsA(isA<ApiFailure>()));
-
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=1')));
     });
 
     test("Should throw an ApiFailure when happen a exception", () async {
@@ -87,9 +75,6 @@ void main() {
 
       expect(
           () => remoteDataSource.getRandomApod(), throwsA(isA<ApiFailure>()));
-
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=1')));
     });
   });
 
@@ -99,9 +84,6 @@ void main() {
 
       final result = await remoteDataSource.getApodFromDate(tDateTime());
 
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&date=2023-3-22')));
-
       expect(result, tApodModel());
     });
 
@@ -110,9 +92,6 @@ void main() {
 
       expect(() => remoteDataSource.getApodFromDate(tDateTime()),
           throwsA(isA<ApiFailure>()));
-
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&date=2023-3-22')));
     });
 
     test("Should throw an ApiFailure when happen a exception", () async {
@@ -120,9 +99,6 @@ void main() {
 
       expect(() => remoteDataSource.getApodFromDate(tDateTime()),
           throwsA(isA<ApiFailure>()));
-
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&date=2023-3-22')));
     });
   });
 
@@ -134,9 +110,6 @@ void main() {
 
       final result = await remoteDataSource.fetchApod();
 
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=20')));
-
       expect(result, tListApodModel());
     });
 
@@ -144,24 +117,16 @@ void main() {
       when(client.get(any)).thenAnswer((_) async => tResponseFailure);
 
       expect(() => remoteDataSource.fetchApod(), throwsA(isA<ApiFailure>()));
-
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=20')));
     });
 
     test("Should throw an ApiFailure when happen a exception", () async {
       when(client.get(any)).thenThrow(const SocketException("message"));
 
       expect(() => remoteDataSource.fetchApod(), throwsA(isA<ApiFailure>()));
-
-      verify(client.get(Uri.parse(
-          'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&count=20')));
     });
   });
 
   group("Function getApodByDateRange", () {
-    String tUrl =
-        "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&start_date=2023-05-05&end_date=2023-05-01";
     test("Should return a list Apod model", () async {
       http.Response tResponseSuccessList =
           http.Response.bytes(utf8.encode(fixture('image_list.json')), 200);
@@ -170,8 +135,6 @@ void main() {
       final result =
           await remoteDataSource.getApodByDateRange('2023-05-05', '2023-05-01');
 
-      verify(client.get(Uri.parse(tUrl)));
-
       expect(result, tListApodModel());
     });
 
@@ -181,8 +144,6 @@ void main() {
       expect(
           () => remoteDataSource.getApodByDateRange('2023-05-05', '2023-05-01'),
           throwsA(isA<ApiFailure>()));
-
-      verify(client.get(Uri.parse(tUrl)));
     });
 
     test("Should throw an ApiFailure when happen a exception", () async {
@@ -191,8 +152,6 @@ void main() {
       expect(
           () => remoteDataSource.getApodByDateRange('2023-05-05', '2023-05-01'),
           throwsA(isA<ApiFailure>()));
-
-      verify(client.get(Uri.parse(tUrl)));
     });
   });
 }

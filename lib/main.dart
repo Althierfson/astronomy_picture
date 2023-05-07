@@ -3,12 +3,14 @@ import 'package:astronomy_picture/core/util/notifications.dart';
 import 'package:astronomy_picture/route_generato.dart';
 import 'package:astronomy_picture/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   setupContainer();
   runApp(const AstronomyPicture());
 }
