@@ -1,3 +1,4 @@
+import 'package:astronomy_picture/theme.dart';
 import 'package:flutter/material.dart';
 
 class ApodDrawer extends StatelessWidget {
@@ -10,13 +11,28 @@ class ApodDrawer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DrawerHeader(child: Image.asset("assets/icon.png")),
+          DrawerHeader(
+              child: Center(
+                  child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(color: PersonalTheme.white))),
+                      child: Image.asset("assets/icon.png")))),
           TextButton.icon(
             onPressed: () {
+              Navigator.pop(context);
               Navigator.pushNamed(context, '/aboutApp');
             },
-            label: const Text("About APP"),
-            icon: const Icon(Icons.info_outline),
+            label: Text(
+              "About APP",
+              style: TextStyle(color: PersonalTheme.white),
+            ),
+            icon: Icon(
+              Icons.info_outline,
+              color: PersonalTheme.white,
+            ),
           )
         ],
       ),

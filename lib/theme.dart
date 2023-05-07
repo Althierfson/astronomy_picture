@@ -27,5 +27,6 @@ class PersonalTheme {
           style: ElevatedButton.styleFrom(backgroundColor: vermilion)),
       snackBarTheme: SnackBarThemeData(
           backgroundColor: spaceBlue,
-          contentTextStyle: TextStyle(color: white)));
+          contentTextStyle: TextStyle(color: white)),
+      drawerTheme: DrawerThemeData(backgroundColor: PersonalTheme.black));
 }
