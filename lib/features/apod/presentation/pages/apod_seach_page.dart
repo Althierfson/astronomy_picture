@@ -2,6 +2,7 @@ import 'package:astronomy_picture/container_injection.dart';
 import 'package:astronomy_picture/core/util/date_convert.dart';
 import 'package:astronomy_picture/features/apod/presentation/bloc/apod_bloc.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_tile.dart';
+import 'package:astronomy_picture/features/apod/presentation/widgets/error_apod_widget.dart';
 import 'package:astronomy_picture/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -13,10 +14,14 @@ class ApodSeachPage extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(
-        textTheme: TextTheme(titleLarge: TextStyle(color: PersonalTheme.white)),
-        appBarTheme: AppBarTheme(backgroundColor: PersonalTheme.black),
-        inputDecorationTheme: InputDecorationTheme(
-            hintStyle: TextStyle(color: PersonalTheme.white)));
+      textTheme: TextTheme(titleLarge: TextStyle(color: PersonalTheme.white)),
+      appBarTheme: AppBarTheme(backgroundColor: PersonalTheme.black),
+      inputDecorationTheme: InputDecorationTheme(
+          hintStyle: TextStyle(color: PersonalTheme.white)),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: PersonalTheme.vermilion)),
+    );
   }
 
   @override
@@ -106,10 +111,11 @@ class ApodSeachPage extends SearchDelegate {
 
           if (state is ErrorApodState) {
             return Center(
-              child: Text(
-                state.msg,
-                style: TextStyle(color: PersonalTheme.white),
-                textAlign: TextAlign.center,
+              child: ErrorApodWidget(
+                msg: state.msg,
+                onRetry: () {
+                  _apodBloc.input.add(GetByDateRangeApodEvent(query: query));
+                },
               ),
             );
           }

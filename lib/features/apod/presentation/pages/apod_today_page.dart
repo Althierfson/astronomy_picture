@@ -37,8 +37,13 @@ class _ApodTodayPageState extends State<ApodTodayPage> {
         }
 
         if (state is ErrorApodState) {
-          body = ErrorApodWidget(
-            msg: state.msg,
+          body = Center(
+            child: ErrorApodWidget(
+              msg: state.msg,
+              onRetry: () {
+                _bloc.input.add(GetTodayApodEvent());
+              },
+            ),
           );
         }
 

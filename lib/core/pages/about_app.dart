@@ -1,3 +1,4 @@
+import 'package:astronomy_picture/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,8 +12,12 @@ class AboutAppPage extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(children: [
-          Text(text),
-          const Text("For more information, please visit:"),
+          Text(
+            text,
+            style: TextStyle(color: PersonalTheme.white),
+          ),
+          Text("For more information, please visit:",
+              style: TextStyle(color: PersonalTheme.white)),
           GestureDetector(
             onTap: () {
               launchUrl(Uri.parse("https://api.nasa.gov/"),
