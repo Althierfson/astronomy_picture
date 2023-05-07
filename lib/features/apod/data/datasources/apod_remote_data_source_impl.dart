@@ -5,14 +5,7 @@ import 'package:astronomy_picture/features/apod/data/datasources/abstract/apod_r
 import 'package:astronomy_picture/features/apod/data/models/apod_model.dart';
 import 'package:http/http.dart' as http;
 
-/// Environment file with NASA API key
-/// You have to create the file in the lib directory
-/// You also need to create a String constant with your API key
-/// See this link https://api.nasa.gov/ how to get your key
-///
-/// Example of the constant you have to create
-///
-/// const String apiKey = "your_key";
+// Go to environment.dart to see how to set the environment
 import 'package:astronomy_picture/environment.dart';
 
 class ApodRemoteDataSourceImpl implements ApodRemoteDataSource {
@@ -75,7 +68,7 @@ class ApodRemoteDataSourceImpl implements ApodRemoteDataSource {
 
   Map<String, String> _makeQuery(QueryType queryType,
       {DateTime? date, String? startDate, String? endDate}) {
-    Map<String, String> query = {'api_key': apiKey, 'thumbs': 'true'};
+    Map<String, String> query = {'api_key': Environment.apidKey, 'thumbs': 'true'};
     switch (queryType) {
       case QueryType.standard:
         return query;
