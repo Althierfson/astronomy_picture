@@ -1,13 +1,34 @@
+import 'package:astronomy_picture/container_injection.dart';
+import 'package:astronomy_picture/core/success_return.dart';
+import 'package:astronomy_picture/core/util/date_convert.dart';
 import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
+import 'package:astronomy_picture/features/apod/presentation/bloc/apod_bloc.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_video.dart';
 import 'package:astronomy_picture/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ApodViewPage extends StatelessWidget {
+class ApodViewPage extends StatefulWidget {
   final Apod apod;
   const ApodViewPage({super.key, required this.apod});
+
+  @override
+  State<ApodViewPage> createState() => _ApodViewPageState();
+}
+
+class _ApodViewPageState extends State<ApodViewPage> {
+  late ApodBloc _apodBloc;
+  late Apod _apod;
+
+  @override
+  void initState() {
+    _apodBloc = getIt<ApodBloc>();
+    _apod = widget.apod;
+    _apodBloc.input
+        .add(IsSaveApodEvent(date: DateConvert.dateToString(_apod.date)));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +83,11 @@ class ApodViewPage extends StatelessWidget {
                           GestureDetector(
                             onDoubleTap: () {
                               clipData(context,
-                                  textToClip: apod.title,
+                                  textToClip: _apod.title,
                                   msg: "Title was copy");
                             },
                             child: Text(
-                              apod.title,
+                              _apod.title,
                               style: TextStyle(
                                   fontSize: 22.0,
                                   color: PersonalTheme.white,
@@ -79,11 +100,11 @@ class ApodViewPage extends StatelessWidget {
                           GestureDetector(
                             onDoubleTap: () {
                               clipData(context,
-                                  textToClip: apod.explanation,
+                                  textToClip: _apod.explanation,
                                   msg: "Description was copy");
                             },
                             child: Text(
-                              apod.explanation,
+                              _apod.explanation,
                               style: TextStyle(
                                 color: PersonalTheme.white,
                               ),
@@ -93,7 +114,7 @@ class ApodViewPage extends StatelessWidget {
                             height: 10,
                           ),
                           Text(
-                            "by ${apod.copyright}",
+                            "by ${_apod.copyright}",
                             style: TextStyle(
                               color: PersonalTheme.white,
                             ),
@@ -117,19 +138,49 @@ class ApodViewPage extends StatelessWidget {
                         description:
                             "Images may be distorted or incomplete! Tap here to view full image in high quality",
                         onTap: () {
-                          launchUrl(Uri.parse(apod.hdurl ?? apod.url),
+                          launchUrl(Uri.parse(_apod.hdurl ?? _apod.url),
                               mode: LaunchMode.externalApplication);
                         }),
                     const SizedBox(
                       width: 15,
                     ),
-                    buildBt(
-                        name: "Save",
-                        icon: Icons.bookmark_border,
-                        description:
-                            "Save this content for quick access in future",
-                        onTap: () {
-                          showSnackBar(context, "No build yet");
+                    StreamBuilder(
+                        stream: _apodBloc.stream,
+                        builder: (context, snapshot) {
+                          var icon = Icons.bookmark_border;
+                          var state = snapshot.data;
+
+                          if (state is LocalAccessSuccessApodState) {
+                            if (state.msg == ApodSave().msg) {
+                              icon = icon = Icons.bookmark;
+                            } else {
+                              icon = icon = Icons.bookmark_border;
+                            }
+
+                            showSnackBar(state.msg);
+                          }
+
+                          if (state is IsSaveApodState) {
+                            if (state.wasSave) {
+                              icon = Icons.bookmark;
+                            }
+                          }
+
+                          return buildBt(
+                              name: "Save",
+                              icon: icon,
+                              description:
+                                  "Save this content for quick access in future",
+                              onTap: () {
+                                if (icon == Icons.bookmark_border) {
+                                  _apodBloc.input
+                                      .add(SaveApodEvent(apod: _apod));
+                                } else {
+                                  _apodBloc.input.add(RemoveSaveApodEvent(
+                                      date: DateConvert.dateToString(
+                                          _apod.date)));
+                                }
+                              });
                         }),
                   ],
                 ),
@@ -180,16 +231,16 @@ class ApodViewPage extends StatelessWidget {
   void clipData(BuildContext context,
       {required String textToClip, required String msg}) {
     Clipboard.setData(ClipboardData(text: textToClip));
-    showSnackBar(context, msg);
+    showSnackBar(msg);
   }
 
   Widget checkMediaType(BuildContext context) {
-    if (apod.mediaType == "image") {
+    if (_apod.mediaType == "image") {
       return Container(
         height: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: NetworkImage(apod.url), fit: BoxFit.fitHeight),
+                image: NetworkImage(_apod.url), fit: BoxFit.fitHeight),
             borderRadius: BorderRadius.circular(30.0),
             border: Border.all(color: PersonalTheme.white.withOpacity(.5))),
       );
@@ -198,7 +249,7 @@ class ApodViewPage extends StatelessWidget {
           height: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage(apod.thumbnailUrl ??
+                  image: NetworkImage(_apod.thumbnailUrl ??
                       "https://spaceplace.nasa.gov/gallery-space/en/NGC2336-galaxy.en.jpg"),
                   fit: BoxFit.fitHeight),
               borderRadius: BorderRadius.circular(30.0),
@@ -207,7 +258,7 @@ class ApodViewPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ApodVideo(
-                url: apod.url,
+                url: _apod.url,
                 showOptions: false,
               ),
             ],
@@ -215,7 +266,9 @@ class ApodViewPage extends StatelessWidget {
     }
   }
 
-  void showSnackBar(BuildContext context, String msg) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+  void showSnackBar(String msg) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+    });
   }
 }

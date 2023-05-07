@@ -102,18 +102,21 @@ class _ApodListPageState extends State<ApodListPage> {
             ),
           ),
           bottomNavigationBar: BottomNavigationBar(
+            currentIndex: 1,
             items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.bookmark), label: 'Bookmark'),
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.today), label: 'Picture of the day'),
             ],
             onTap: (value) {
-              if (value == 1) {
-                Navigator.pushNamed(context, '/apodToday');
+              if (value == 0) {
+                Navigator.pushNamed(context, '/apodSave');
               }
 
               if (value == 2) {
-                Navigator.pushNamed(context, '/apodDate');
+                Navigator.pushNamed(context, '/apodToday');
               }
             },
           ),

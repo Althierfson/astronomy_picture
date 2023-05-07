@@ -37,3 +37,21 @@ class SuccessListApodState extends ApodState {
   @override
   List<Object> get props => [list];
 }
+
+class LocalAccessSuccessApodState extends ApodState {
+  final String msg;
+
+  const LocalAccessSuccessApodState({required this.msg});
+
+  @override
+  List<Object> get props => [msg];
+}
+
+class IsSaveApodState extends ApodState {
+  final bool wasSave;
+
+  const IsSaveApodState({required this.wasSave});
+
+  @override
+  List<Object> get props => [wasSave];
+}
