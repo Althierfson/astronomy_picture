@@ -24,6 +24,30 @@ class ApodModel extends Apod {
         thumbnailUrl: json["thumbnail_url"],
       );
 
+  factory ApodModel.fromEntity(Apod apod) => ApodModel(
+        copyright: apod.copyright,
+        date: apod.date,
+        explanation: apod.explanation,
+        mediaType: apod.mediaType,
+        serviceVersion: apod.serviceVersion,
+        title: apod.title,
+        url: apod.url,
+        hdurl: apod.hdurl,
+        thumbnailUrl: apod.thumbnailUrl,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'copyright': copyright,
+        'date': date.toString(),
+        'explanation': explanation,
+        'media_type': mediaType,
+        'service_version': serviceVersion,
+        'title': title,
+        'url': url,
+        'hdurl': hdurl,
+        'thumbnail_url': thumbnailUrl,
+      };
+
   Apod toEntity() => Apod(
       copyright: copyright,
       date: date,

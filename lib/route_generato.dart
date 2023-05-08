@@ -2,6 +2,7 @@ import 'package:astronomy_picture/core/pages/about_app.dart';
 import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
 import 'package:astronomy_picture/features/apod/presentation/pages/apod_date_page.dart';
 import 'package:astronomy_picture/features/apod/presentation/pages/apod_list_page.dart';
+import 'package:astronomy_picture/features/apod/presentation/pages/apod_save_page.dart';
 import 'package:astronomy_picture/features/apod/presentation/pages/apod_today_page.dart';
 import 'package:astronomy_picture/features/apod/presentation/pages/apod_view_page.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,8 @@ class RouteGenerato {
         return (_) => const ApodDatePage();
       case '/aboutApp':
         return (_) => const AboutAppPage();
+      case '/apodSave':
+        return (_) => const ApodSavePage();
       default:
         return (_) => _errorPage();
     }

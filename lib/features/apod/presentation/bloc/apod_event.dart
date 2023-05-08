@@ -30,3 +30,32 @@ class GetByDateRangeApodEvent extends ApodEvent {
   @override
   List<Object> get props => [query];
 }
+
+class IsSaveApodEvent extends ApodEvent {
+  final String date;
+
+  const IsSaveApodEvent({required this.date});
+
+  @override
+  List<Object> get props => [date];
+}
+
+class GetAllSaveApodEvent extends ApodEvent {}
+
+class RemoveSaveApodEvent extends ApodEvent {
+  final String date;
+
+  const RemoveSaveApodEvent({required this.date});
+
+  @override
+  List<Object> get props => [date];
+}
+
+class SaveApodEvent extends ApodEvent {
+  final Apod apod;
+
+  const SaveApodEvent({required this.apod});
+
+  @override
+  List<Object> get props => [apod];
+}

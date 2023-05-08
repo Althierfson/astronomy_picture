@@ -3,24 +3,35 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
-import 'package:astronomy_picture/core/failure.dart' as _i6;
-import 'package:astronomy_picture/core/util/usecase.dart' as _i8;
+import 'package:astronomy_picture/core/failure.dart' as _i7;
+import 'package:astronomy_picture/core/success_return.dart' as _i17;
+import 'package:astronomy_picture/core/util/usecase.dart' as _i9;
 import 'package:astronomy_picture/features/apod/domain/entities/apod.dart'
-    as _i7;
+    as _i8;
+import 'package:astronomy_picture/features/apod/domain/repositories/apod_local_repository.dart'
+    as _i4;
 import 'package:astronomy_picture/features/apod/domain/repositories/apod_repository.dart'
     as _i2;
+import 'package:astronomy_picture/features/apod/domain/usecases/apod_is_save.dart'
+    as _i14;
 import 'package:astronomy_picture/features/apod/domain/usecases/fetch_apod.dart'
-    as _i11;
-import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_by_date_range.dart'
     as _i12;
+import 'package:astronomy_picture/features/apod/domain/usecases/get_all_apod_save.dart'
+    as _i15;
+import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_by_date_range.dart'
+    as _i13;
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_from_date.dart'
-    as _i10;
+    as _i11;
 import 'package:astronomy_picture/features/apod/domain/usecases/get_random_apod.dart'
-    as _i9;
+    as _i10;
 import 'package:astronomy_picture/features/apod/domain/usecases/get_today_apod.dart'
-    as _i4;
+    as _i5;
+import 'package:astronomy_picture/features/apod/domain/usecases/remove_save_apod.dart'
+    as _i16;
+import 'package:astronomy_picture/features/apod/domain/usecases/save_apod.dart'
+    as _i18;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -56,10 +67,21 @@ class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
         );
 }
 
+class _FakeApodLocalRepository_2 extends _i1.SmartFake
+    implements _i4.ApodLocalRepository {
+  _FakeApodLocalRepository_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [GetTodayApod].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetTodayApod extends _i1.Mock implements _i4.GetTodayApod {
+class MockGetTodayApod extends _i1.Mock implements _i5.GetTodayApod {
   @override
   _i2.ApodRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
@@ -73,15 +95,15 @@ class MockGetTodayApod extends _i1.Mock implements _i4.GetTodayApod {
         ),
       ) as _i2.ApodRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>> call(
-          _i8.NoParameter? parameter) =>
+  _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>> call(
+          _i9.NoParameter? parameter) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [parameter],
         ),
-        returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>>.value(
-            _FakeEither_1<_i6.Failure, _i7.Apod>(
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>>.value(
+            _FakeEither_1<_i7.Failure, _i8.Apod>(
           this,
           Invocation.method(
             #call,
@@ -89,21 +111,21 @@ class MockGetTodayApod extends _i1.Mock implements _i4.GetTodayApod {
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>>.value(
-                _FakeEither_1<_i6.Failure, _i7.Apod>(
+            _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>>.value(
+                _FakeEither_1<_i7.Failure, _i8.Apod>(
           this,
           Invocation.method(
             #call,
             [parameter],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>>);
 }
 
 /// A class which mocks [GetRandomApod].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetRandomApod extends _i1.Mock implements _i9.GetRandomApod {
+class MockGetRandomApod extends _i1.Mock implements _i10.GetRandomApod {
   @override
   _i2.ApodRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
@@ -117,15 +139,15 @@ class MockGetRandomApod extends _i1.Mock implements _i9.GetRandomApod {
         ),
       ) as _i2.ApodRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>> call(
-          _i8.NoParameter? parameter) =>
+  _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>> call(
+          _i9.NoParameter? parameter) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [parameter],
         ),
-        returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>>.value(
-            _FakeEither_1<_i6.Failure, _i7.Apod>(
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>>.value(
+            _FakeEither_1<_i7.Failure, _i8.Apod>(
           this,
           Invocation.method(
             #call,
@@ -133,21 +155,21 @@ class MockGetRandomApod extends _i1.Mock implements _i9.GetRandomApod {
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>>.value(
-                _FakeEither_1<_i6.Failure, _i7.Apod>(
+            _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>>.value(
+                _FakeEither_1<_i7.Failure, _i8.Apod>(
           this,
           Invocation.method(
             #call,
             [parameter],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>>);
 }
 
 /// A class which mocks [GetApodFromDate].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetApodFromDate extends _i1.Mock implements _i10.GetApodFromDate {
+class MockGetApodFromDate extends _i1.Mock implements _i11.GetApodFromDate {
   @override
   _i2.ApodRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
@@ -161,14 +183,14 @@ class MockGetApodFromDate extends _i1.Mock implements _i10.GetApodFromDate {
         ),
       ) as _i2.ApodRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>> call(DateTime? parameter) =>
+  _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>> call(DateTime? parameter) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [parameter],
         ),
-        returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>>.value(
-            _FakeEither_1<_i6.Failure, _i7.Apod>(
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>>.value(
+            _FakeEither_1<_i7.Failure, _i8.Apod>(
           this,
           Invocation.method(
             #call,
@@ -176,21 +198,21 @@ class MockGetApodFromDate extends _i1.Mock implements _i10.GetApodFromDate {
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>>.value(
-                _FakeEither_1<_i6.Failure, _i7.Apod>(
+            _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>>.value(
+                _FakeEither_1<_i7.Failure, _i8.Apod>(
           this,
           Invocation.method(
             #call,
             [parameter],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.Apod>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, _i8.Apod>>);
 }
 
 /// A class which mocks [FetchApod].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFetchApod extends _i1.Mock implements _i11.FetchApod {
+class MockFetchApod extends _i1.Mock implements _i12.FetchApod {
   @override
   _i2.ApodRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
@@ -204,15 +226,15 @@ class MockFetchApod extends _i1.Mock implements _i11.FetchApod {
         ),
       ) as _i2.ApodRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>> call(
-          _i8.NoParameter? parameter) =>
+  _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>> call(
+          _i9.NoParameter? parameter) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [parameter],
         ),
-        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>>.value(
-            _FakeEither_1<_i6.Failure, List<_i7.Apod>>(
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>>.value(
+            _FakeEither_1<_i7.Failure, List<_i8.Apod>>(
           this,
           Invocation.method(
             #call,
@@ -220,22 +242,22 @@ class MockFetchApod extends _i1.Mock implements _i11.FetchApod {
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>>.value(
-                _FakeEither_1<_i6.Failure, List<_i7.Apod>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i8.Apod>>(
           this,
           Invocation.method(
             #call,
             [parameter],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>>);
 }
 
 /// A class which mocks [GetApodByDateRange].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetApodByDateRange extends _i1.Mock
-    implements _i12.GetApodByDateRange {
+    implements _i13.GetApodByDateRange {
   @override
   _i2.ApodRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
@@ -249,14 +271,14 @@ class MockGetApodByDateRange extends _i1.Mock
         ),
       ) as _i2.ApodRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>> call(String? parameter) =>
+  _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>> call(String? parameter) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [parameter],
         ),
-        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>>.value(
-            _FakeEither_1<_i6.Failure, List<_i7.Apod>>(
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>>.value(
+            _FakeEither_1<_i7.Failure, List<_i8.Apod>>(
           this,
           Invocation.method(
             #call,
@@ -264,13 +286,190 @@ class MockGetApodByDateRange extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>>.value(
-                _FakeEither_1<_i6.Failure, List<_i7.Apod>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i8.Apod>>(
           this,
           Invocation.method(
             #call,
             [parameter],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Apod>>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>>);
+}
+
+/// A class which mocks [ApodIsSave].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockApodIsSave extends _i1.Mock implements _i14.ApodIsSave {
+  @override
+  _i4.ApodLocalRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i4.ApodLocalRepository);
+  @override
+  _i6.Future<_i3.Either<_i7.Failure, bool>> call(String? parameter) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [parameter],
+        ),
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, bool>>.value(
+            _FakeEither_1<_i7.Failure, bool>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i3.Either<_i7.Failure, bool>>.value(
+                _FakeEither_1<_i7.Failure, bool>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.Failure, bool>>);
+}
+
+/// A class which mocks [GetAllApodSave].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetAllApodSave extends _i1.Mock implements _i15.GetAllApodSave {
+  @override
+  _i4.ApodLocalRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i4.ApodLocalRepository);
+  @override
+  _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>> call(
+          _i9.NoParameter? parameter) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [parameter],
+        ),
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>>.value(
+            _FakeEither_1<_i7.Failure, List<_i8.Apod>>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i8.Apod>>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i8.Apod>>>);
+}
+
+/// A class which mocks [RemoveSaveApod].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRemoveSaveApod extends _i1.Mock implements _i16.RemoveSaveApod {
+  @override
+  _i4.ApodLocalRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i4.ApodLocalRepository);
+  @override
+  _i6.Future<_i3.Either<_i7.Failure, _i17.SuccessReturn>> call(
+          String? parameter) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [parameter],
+        ),
+        returnValue:
+            _i6.Future<_i3.Either<_i7.Failure, _i17.SuccessReturn>>.value(
+                _FakeEither_1<_i7.Failure, _i17.SuccessReturn>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i3.Either<_i7.Failure, _i17.SuccessReturn>>.value(
+                _FakeEither_1<_i7.Failure, _i17.SuccessReturn>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.Failure, _i17.SuccessReturn>>);
+}
+
+/// A class which mocks [SaveApod].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSaveApod extends _i1.Mock implements _i18.SaveApod {
+  @override
+  _i4.ApodLocalRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i4.ApodLocalRepository);
+  @override
+  _i6.Future<_i3.Either<_i7.Failure, _i17.SuccessReturn>> call(
+          _i8.Apod? parameter) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [parameter],
+        ),
+        returnValue:
+            _i6.Future<_i3.Either<_i7.Failure, _i17.SuccessReturn>>.value(
+                _FakeEither_1<_i7.Failure, _i17.SuccessReturn>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i3.Either<_i7.Failure, _i17.SuccessReturn>>.value(
+                _FakeEither_1<_i7.Failure, _i17.SuccessReturn>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.Failure, _i17.SuccessReturn>>);
 }

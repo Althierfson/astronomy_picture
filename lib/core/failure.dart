@@ -24,3 +24,21 @@ class ConvertFailure extends Failure {
   @override
   String get msg => "Sorry! Your query is not in the right format";
 }
+
+/// is no possible save data
+class SaveDataFailure extends Failure {
+  @override
+  String get msg => "Sorry! There was a problem when saving";
+}
+
+/// is no possible remove data
+class RemoveDataFailure extends Failure {
+  @override
+  String get msg => "Sorry! There was a problem when removing";
+}
+
+/// is no possible acesse local data
+class AccessLocalDataFailure extends Failure {
+  @override
+  String get msg => "Sorry! There was a problem accessing local data";
+}
