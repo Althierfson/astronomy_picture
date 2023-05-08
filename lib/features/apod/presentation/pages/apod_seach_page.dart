@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:astronomy_picture/container_injection.dart';
 import 'package:astronomy_picture/core/util/date_convert.dart';
+import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
 import 'package:astronomy_picture/features/apod/presentation/bloc/apod_bloc.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/apod_tile.dart';
 import 'package:astronomy_picture/features/apod/presentation/widgets/error_apod_widget.dart';
@@ -10,6 +13,16 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 class ApodSeachPage extends SearchDelegate {
   PickerDateRange choosedDate = PickerDateRange(DateTime.now(), DateTime.now());
   late ApodBloc _apodBloc;
+  String _cacheQuery = "";
+  List<Apod> _cacheList = [];
+  final StreamController<ApodState> _stream = StreamController.broadcast();
+
+  ApodSeachPage() {
+    _apodBloc = getIt<ApodBloc>();
+    _apodBloc.stream.listen((event) {
+      _stream.add(event);
+    });
+  }
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -92,12 +105,15 @@ class ApodSeachPage extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    _apodBloc = getIt<ApodBloc>();
-    _apodBloc.input.add(GetByDateRangeApodEvent(query: query));
+    if (query != _cacheQuery) {
+      _apodBloc.input.add(GetByDateRangeApodEvent(query: query));
+      _cacheQuery = query;
+    }
+
     return Container(
       color: PersonalTheme.spaceBlue,
       child: StreamBuilder(
-        stream: _apodBloc.stream,
+        stream: _stream.stream,
         builder: (context, snapshot) {
           ApodState? state = snapshot.data;
 
@@ -121,22 +137,34 @@ class ApodSeachPage extends SearchDelegate {
           }
 
           if (state is SuccessListApodState) {
-            final list = state.list;
-            return ListView.builder(
-              itemCount: list.length,
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ApodTile(
-                    apod: list[index],
-                    onTap: () {
-                      Navigator.pushNamed(context, '/apodView',
-                          arguments: list[index]);
-                    }),
+            _cacheList = state.list;
+          }
+
+          if (_cacheList.isEmpty) {
+            return Center(
+              child: ErrorApodWidget(
+                msg: "Sorry! We not find any content for this search.",
+                onRetry: () {
+                  _apodBloc.input.add(GetByDateRangeApodEvent(query: query));
+                },
               ),
             );
           }
 
-          return Container();
+          return ListView.builder(
+            itemCount: _cacheList.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ApodTile(
+                    apod: _cacheList[index],
+                    onTap: () {
+                      Navigator.pushNamed(context, '/apodView',
+                          arguments: _cacheList[index]);
+                    }),
+              );
+            },
+          );
         },
       ),
     );
