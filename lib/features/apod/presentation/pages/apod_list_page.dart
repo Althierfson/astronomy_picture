@@ -84,11 +84,12 @@ class _ApodListPageState extends State<ApodListPage> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ApodTile(
-                        apod: apodList[index],
-                        onTap: () {
-                          Navigator.pushNamed(context, '/apodView',
-                              arguments: apodList[index]);
-                        }),
+                      apod: apodList[index],
+                      onTap: () {
+                        Navigator.pushNamed(context, '/apodView',
+                            arguments: apodList[index]);
+                      },
+                    ),
                   );
                 } else {
                   return Padding(
