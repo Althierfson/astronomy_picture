@@ -40,8 +40,8 @@ O aplicativo é capaz de:
 
 2. Nasa API Key:
 
-      Antes de executar você precisa criar um arquivo '/environment.dart' no diretório '/lib/'
-      Esse arquivo deve conter um String com a sua chave de acesso a API da Nasa
+      Antes de executar você precisa configurar sua chave no arquivo '/environment.dart' no diretório '/lib/'
+      Esse arquivo deve conter uma String com a sua chave de acesso a API da Nasa
       Veja esse link em [Nasa API](https://api.nasa.gov/) para gerar sua chave
 
 3. Abra o terminal na pasta do projeto e execute o comando ```flutter pub get``` para instalar as dependências;
