@@ -6,6 +6,14 @@ Nesse APP que se comunica com a API [Apod](https://api.nasa.gov/) da nasa você 
 
 Você também pode ver imagens aleatórias e, caso queira, pode ver qual era a imagem em destaque de um dia especifico.
 
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/42945474/236709001-4cecff40-ad36-4557-bd11-78305429daad.jpg", width="250px"/>
+  <img src="https://user-images.githubusercontent.com/42945474/236709088-b196bcee-e0b8-42c5-b0ac-3297f1b8bdd1.jpg", width="250px"/>
+  <img src="https://user-images.githubusercontent.com/42945474/236709130-4cc5631b-60d6-4a07-b54f-3a11a74b56fa.jpg", width="250px"/>
+  <img src="https://user-images.githubusercontent.com/42945474/236709156-e23d03d7-b00f-43fa-9ef5-ff0adf7ebbd3.jpg", width="250px"/>
+  <img src="https://user-images.githubusercontent.com/42945474/236709169-e1f29a49-3b81-4f7c-aa29-5d985257d59e.jpg", width="250px"/>
+</div>
+
 ## Sobre esse projeto (Técnico)
 
 Este projeto é um exemplo de aplicação em Flutter que utiliza técnicas de TDD (Desenvolvimento Orientado a Testes) e a arquitetura Clean Architecture, que permite separar as camadas de negócio, aplicação e infraestrutura. Além disso, o projeto faz uso do padrão Bloc para gerenciamento de estado e consumo de APIs externas.
@@ -18,6 +26,7 @@ Tecnologias utilizadas
 - Bloc
 - API REST
 
+
 ## Funcionalidades
 O aplicativo é capaz de:
 
@@ -28,6 +37,7 @@ O aplicativo é capaz de:
 
 ## Como executar
 1. Clone o repositório;
+
 2. Nasa API Key:
 
       Antes de executar você precisa criar um arquivo '/environment.dart' no diretório '/lib/'
