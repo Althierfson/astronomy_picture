@@ -4,7 +4,7 @@ Explore o universo com o nosso app! A cada dia uma nova imagem incrível do espa
 
 Nesse APP que se comunica com a API [Apod](https://api.nasa.gov/) da nasa você pode ver qual a imagem do espaço a Nasa esta destacando, pode ver seu título, descrição e curiosidades sobre a imagem.
 
-Você também pode ver imagens aleatórias e, caso queira, pode ver qual era a imagem em destaque de um dia especifico.
+Você também pode ver imagens aleatórias e, caso queira, pode ver qual era a imagem em destaque de um dia especifico, ou ver as imagens de um período.
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/42945474/236709001-4cecff40-ad36-4557-bd11-78305429daad.jpg", width="250px"/>
@@ -32,8 +32,9 @@ O aplicativo é capaz de:
 
 - Exibir imagem ou vídeo do dia e sua descrição vindo da API APOD;
 - Listar imagens ou vídeos aleatorios com suas descrições vindo da API APOD em uma infinite scroll view;
-- Exibir imagens ou vídeos e suas descrições baseados em um dia especifico vindo da API APOD;
-- Exibir notificações diárias convidando o usuário a visitar o APP
+- Permite que o usuário faça busca por conteúdos baseados em uma dia ou período especifico
+- Exibir notificações diárias convidando o usuário a visitar o APP;
+- Pemite que o usuário salve localmente seus conteúdos favoritos;
 
 ## Como executar
 1. Clone o repositório;
