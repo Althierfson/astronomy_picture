@@ -20,4 +20,13 @@ abstract class ApodLocalRepository {
   /// Return an Apod List on Right side of Either case is a success, otherwise
   /// Return a Failure on Left side of Either
   Future<Either<Failure, List<Apod>>> getAllApodSave();
+
+  /// Return an String List on Right side of Either case is a success, otherwise
+  /// Return a Failure on Left side of Either
+  Future<Either<Failure, List<String>>> updateSearchHistory(
+      List<String> historyList);
+
+  /// Return an String List on Right side of Either case is a success, otherwise
+  /// Return a Failure on Left side of Either
+  Future<Either<Failure, List<String>>> fetchSearchHistory();
 }

@@ -8,6 +8,7 @@ import 'package:astronomy_picture/features/apod/data/models/apod_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String apodKey = 'APOD_KEY';
+const String historySearchKey = 'HISTORY_SEARCH_KEY';
 
 class ApodLocalDataSourceImpl implements ApodLocalDataSource {
   final SharedPreferences sharedPreferences;
@@ -27,6 +28,7 @@ class ApodLocalDataSourceImpl implements ApodLocalDataSource {
   Future<List<ApodModel>> getAllApodSave() async {
     try {
       final keys = sharedPreferences.getKeys();
+      keys.remove(historySearchKey);
 
       List<ApodModel> list = [];
       for (var k in keys) {
@@ -60,6 +62,25 @@ class ApodLocalDataSourceImpl implements ApodLocalDataSource {
       return ApodSave();
     } catch (e) {
       throw SaveDataFailure();
+    }
+  }
+
+  @override
+  Future<List<String>> getSearchHistory() async {
+    try {
+      return sharedPreferences.getStringList(historySearchKey) ?? [];
+    } catch (e) {
+      throw AccessLocalDataFailure();
+    }
+  }
+
+  @override
+  Future<List<String>> updateSearchHistory(List<String> history) async {
+    try {
+      await sharedPreferences.setStringList(historySearchKey, history);
+      return getSearchHistory();
+    } catch (e) {
+      throw AccessLocalDataFailure();
     }
   }
 }

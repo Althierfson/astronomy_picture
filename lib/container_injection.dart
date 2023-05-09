@@ -10,6 +10,7 @@ import 'package:astronomy_picture/features/apod/domain/repositories/apod_local_r
 import 'package:astronomy_picture/features/apod/domain/repositories/apod_repository.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/apod_is_save.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/fetch_apod.dart';
+import 'package:astronomy_picture/features/apod/domain/usecases/fetch_search_history.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_all_apod_save.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_by_date_range.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_from_date.dart';
@@ -17,6 +18,7 @@ import 'package:astronomy_picture/features/apod/domain/usecases/get_random_apod.
 import 'package:astronomy_picture/features/apod/domain/usecases/get_today_apod.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/remove_save_apod.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/save_apod.dart';
+import 'package:astronomy_picture/features/apod/domain/usecases/update_search_history.dart';
 import 'package:astronomy_picture/features/apod/presentation/bloc/apod_bloc.dart';
 import 'package:astronomy_picture/route_generato.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -72,16 +74,21 @@ void apodFeature() {
   getIt.registerLazySingleton(() => GetAllApodSave(repository: getIt()));
   getIt.registerLazySingleton(() => RemoveSaveApod(repository: getIt()));
   getIt.registerLazySingleton(() => SaveApod(repository: getIt()));
+  getIt.registerLazySingleton(() => FetchSearchHistory(repository: getIt()));
+  getIt.registerLazySingleton(() => UpdateSearchHistory(repository: getIt()));
 
   // bloc
   getIt.registerFactory(() => ApodBloc(
-      getTodayApod: getIt(),
-      getRandomApod: getIt(),
-      getApodFromDate: getIt(),
-      fetchApod: getIt(),
-      getApodByDateRange: getIt(),
-      apodIsSave: getIt(),
-      getAllApodSave: getIt(),
-      removeSaveApod: getIt(),
-      saveApod: getIt()));
+        getTodayApod: getIt(),
+        getRandomApod: getIt(),
+        getApodFromDate: getIt(),
+        fetchApod: getIt(),
+        getApodByDateRange: getIt(),
+        apodIsSave: getIt(),
+        getAllApodSave: getIt(),
+        removeSaveApod: getIt(),
+        saveApod: getIt(),
+        fetchSearchHistory: getIt(),
+        updateSearchHistory: getIt(),
+      ));
 }

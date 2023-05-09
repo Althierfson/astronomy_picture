@@ -103,4 +103,23 @@ class MockApodLocalDataSource extends _i1.Mock
         returnValueForMissingStub:
             _i4.Future<List<_i5.ApodModel>>.value(<_i5.ApodModel>[]),
       ) as _i4.Future<List<_i5.ApodModel>>);
+  @override
+  _i4.Future<List<String>> getSearchHistory() => (super.noSuchMethod(
+        Invocation.method(
+          #getSearchHistory,
+          [],
+        ),
+        returnValue: _i4.Future<List<String>>.value(<String>[]),
+        returnValueForMissingStub: _i4.Future<List<String>>.value(<String>[]),
+      ) as _i4.Future<List<String>>);
+  @override
+  _i4.Future<List<String>> updateSearchHistory(List<String>? history) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateSearchHistory,
+          [history],
+        ),
+        returnValue: _i4.Future<List<String>>.value(<String>[]),
+        returnValueForMissingStub: _i4.Future<List<String>>.value(<String>[]),
+      ) as _i4.Future<List<String>>);
 }

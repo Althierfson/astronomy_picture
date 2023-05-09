@@ -59,3 +59,14 @@ class SaveApodEvent extends ApodEvent {
   @override
   List<Object> get props => [apod];
 }
+
+class GetHistorySearchApodEvent extends ApodEvent {}
+
+class UpdateHistorySearchApodEvent extends ApodEvent {
+  final List<String> list;
+
+  const UpdateHistorySearchApodEvent({required this.list});
+
+  @override
+  List<Object> get props => [list];
+}

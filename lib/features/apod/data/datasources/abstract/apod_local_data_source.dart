@@ -18,4 +18,12 @@ abstract class ApodLocalDataSource {
   /// Return a list [ApodModel] case is a success, otherwise
   /// throw a [Failure]
   Future<List<ApodModel>> getAllApodSave();
+
+  /// Return a list [String] case is a success, otherwise
+  /// throw a [Failure]
+  Future<List<String>> getSearchHistory();
+
+  /// Return a list [String] case is a success, otherwise
+  /// throw a [Failure]
+  Future<List<String>> updateSearchHistory(List<String> history);
 }

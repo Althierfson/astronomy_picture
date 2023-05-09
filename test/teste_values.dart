@@ -25,4 +25,8 @@ ApodModel Function() tApodModel = () => ApodModel(
 
 List<Apod> Function() tListApod = () => [tApod(), tApod(), tApod()];
 
-List<ApodModel> Function() tListApodModel = () => [tApodModel(), tApodModel(), tApodModel()];
+List<ApodModel> Function() tListApodModel =
+    () => [tApodModel(), tApodModel(), tApodModel()];
+
+List<String> Function() tHistoryList =
+    () => ["2004-09-27", "2004-09-27/2004-09-27", "2004-09-27"];

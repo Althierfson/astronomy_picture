@@ -121,6 +121,12 @@ class _ApodViewPageState extends State<ApodViewPage> {
                               color: PersonalTheme.white,
                             ),
                           ),
+                          Text(
+                            "Date: ${DateConvert.dateToString(_apod.date)} (YYYY-MM-DD)",
+                            style: TextStyle(
+                              color: PersonalTheme.white,
+                            ),
+                          ),
                         ],
                       ),
                     ),
