@@ -1,10 +1,10 @@
 # Astronomy Picture
 
-Explore o universo com o nosso app! A cada dia uma nova imagem incrível do espaço, informações detalhadas e curiosidades da NASA na palma da sua mão.
+Explore the universe with our app! Every day a new incredible image of space, detailed information and curiosities of NASA in the palm of your hand.
 
-Nesse APP que se comunica com a API [Apod](https://api.nasa.gov/) da nasa você pode ver qual a imagem do espaço a Nasa esta destacando, pode ver seu título, descrição e curiosidades sobre a imagem.
+In this APP that communicates with NASA's [Apod](https://api.nasa.gov/) API, you can see which image of space NASA is highlighting, you can see its title, description and curiosities about the image.
 
-Você também pode ver imagens aleatórias e, caso queira, pode ver qual era a imagem em destaque de um dia especifico, ou ver as imagens de um período.
+You can also see random images and, if you want, you can see which were the featured images of a specific day or period.
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/42945474/236709001-4cecff40-ad36-4557-bd11-78305429daad.jpg", width="250px"/>
@@ -17,11 +17,11 @@ Você também pode ver imagens aleatórias e, caso queira, pode ver qual era a i
 ## Acesse o APP
 Play Store link: [Astronomy Picture](https://play.google.com/store/apps/details?id=com.cajuapps.astronomy_picture)
 
-## Sobre esse projeto (Técnico)
+## About this project (Technical)
 
-Este projeto é um exemplo de aplicação em Flutter que utiliza técnicas de TDD (Desenvolvimento Orientado a Testes) e a arquitetura Clean Architecture, que permite separar as camadas de negócio, aplicação e infraestrutura. Além disso, o projeto faz uso do padrão Bloc para gerenciamento de estado e consumo de APIs externas.
+This project is an example of an application in Flutter that uses TDD (Test Driven Development) and Clean Architecture techniques, which allows separating the layers of business, application and infrastructure. In addition, the project makes use of the Bloc pattern for state management and consumption of external APIs.
 
-Tecnologias utilizadas
+Technologies used:
 - Flutter
 - Dart
 - TDD (Test Driven Development)
@@ -30,54 +30,56 @@ Tecnologias utilizadas
 - API REST
 
 
-## Funcionalidades
-O aplicativo é capaz de:
+## Functionalities
+The APP is able of:
 
-- Exibir imagem ou vídeo do dia e sua descrição vindo da API APOD;
-- Listar imagens ou vídeos aleatorios com suas descrições vindo da API APOD em uma infinite scroll view;
-- Permite que o usuário faça busca por conteúdos baseados em uma dia ou período especifico
-- Exibir notificações diárias convidando o usuário a visitar o APP;
-- Pemite que o usuário salve localmente seus conteúdos favoritos;
+- Show the featured image or video with its description
+- Show random images and videos in an infinite scroll view;
+- Allow the user to search for specific content based on a day or period;
+- Show daily notification inviting user to visit APP;
+- Allow the user to save locally the content he likes;
 
-## Como executar
-1. Clone o repositório;
+## how to run
+1. Clone the repository;
 
 2. Nasa API Key:
 
-      Antes de executar você precisa configurar sua chave no arquivo '/environment.dart' no diretório '/lib/'
-      Esse arquivo deve conter uma String com a sua chave de acesso a API da Nasa
-      Veja esse link em [Nasa API](https://api.nasa.gov/) para gerar sua chave
+      Before running you need to configure your own key in the '/environment.dart' file in the '/lib/' directory
+      This file must contain a String with your NASA API access key
+      See this link on [NASA API](https://api.nasa.gov/) to generate your key
 
-3. Abra o terminal na pasta do projeto e execute o comando ```flutter pub get``` para instalar as dependências;
-4. Execute a aplicação com o comando ```flutter run```.
+3. Open the terminal in the project folder and run the command ```flutter pub get``` to install the dependencies;
+4. Run the application with the command ```flutter run```.
 
-## Estrutura do projeto
-O projeto segue a seguinte estrutura:
+## Project Structure
+The project has the following structure:
 
-- lib: diretório principal do projeto;
-  - core: diretorio com Funções e features gerais
-  - features: Camada com todas as features do projeto
-    - data: camada de infraestrutura, onde estão as classes de repositório e o serviço de API;
-    - domain: camada de domínio, onde estão as entidades, regras de negócio e interfaces de repositório;
-    - presentation: camada de aplicação, onde estão as classes de apresentação, views e blocos.
+- lib: main directory;
+  - core: directory with genral features
+  - features: directory with all project features, all with:
+    - data: infrastructure layer, with all repositories classes and API service;
+    - domain: domínio layer, with all entities, business rules, and repositories interface;
+    - presentation: application layer, with all presentations classes, views and blocs;
 
-## Testes
-O projeto segue uma abordagem de TDD, com testes unitários em todas as camadas. Os testes podem ser encontrados no diretório test.
+## Tests
+The project follows a TDD approach, with unit tests in all layers. Tests can be found in the test directory.
 
 ## Limitações atuais
 Esse projeto foi configurado e unicamente testado em ambientes android.
 
-## Autor
+## Author
 Althierfson Tullio
 
-## Licença
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para obter mais informações.
+## License
+This project is licensed under the MIT license. See the LICENSE file for more information.
 
 ## Informações Importantes
-Esse aplicativo é uma plataforma que utiliza a API APOD da NASA para exibir imagens e vídeos incríveis do espaço sideral. É importante destacar que a NASA não possui qualquer relação com o aplicativo, visto que as informações são fornecidas de forma aberta e livre para qualquer um que deseje acessá-las através da API.
+This app is a platform that uses NASA's APOD API to display amazing images and videos from outer space.
 
-O aplicativo busca organizar e fornecer um meio fácil de acesso a esses dados, para que os usuários possam explorar e se encantar com o que o espaço tem a oferecer.
+It is important to emphasize that NASA has no relationship with the application, since the information is provided openly and freely for anyone who wants to access it through the API.
 
-Ressaltamos que algumas imagens e vídeos podem estar sujeitos a direitos autorais, por isso é importante consultar os direitos de uso antes de utilizar qualquer conteúdo encontrado no aplicativo.
+The application seeks to organize and provide an easy way to access this data, so that users can explore and be delighted with what the space has to offer.
 
-Para mais informações sobre a API APOD da NASA, acesse https://api.nasa.gov/."
+We emphasize that some images and videos may be subject to copyright, so it is important to consult the rights of use before using any content found in the application.
+
+For more information on NASA's APOD API, visit https://api.nasa.gov/."
