@@ -14,6 +14,9 @@ Você também pode ver imagens aleatórias e, caso queira, pode ver qual era a i
   <img src="https://user-images.githubusercontent.com/42945474/236709169-e1f29a49-3b81-4f7c-aa29-5d985257d59e.jpg", width="250px"/>
 </div>
 
+## Acesse o APP
+Play Store link: [Astronomy Picture](https://play.google.com/store/apps/details?id=com.cajuapps.astronomy_picture)
+
 ## Sobre esse projeto (Técnico)
 
 Este projeto é um exemplo de aplicação em Flutter que utiliza técnicas de TDD (Desenvolvimento Orientado a Testes) e a arquitetura Clean Architecture, que permite separar as camadas de negócio, aplicação e infraestrutura. Além disso, o projeto faz uso do padrão Bloc para gerenciamento de estado e consumo de APIs externas.
