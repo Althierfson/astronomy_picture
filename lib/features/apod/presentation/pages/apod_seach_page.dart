@@ -113,7 +113,7 @@ class ApodSeachPage extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    if (query != _cacheQuery) {
+    if (query != _cacheQuery && query.isNotEmpty) {
       _apodBloc.input.add(GetByDateRangeApodEvent(query: query));
       _cacheQuery = query;
     }
@@ -145,9 +145,12 @@ class ApodSeachPage extends SearchDelegate {
           }
 
           if (state is SuccessListApodState) {
-            _searcHistory.add(query);
-            _apodBlocHistory.input
-                .add(UpdateHistorySearchApodEvent(list: _searcHistory));
+            if (query.isNotEmpty) {
+              _searcHistory.add(query);
+              _apodBlocHistory.input
+                  .add(UpdateHistorySearchApodEvent(list: _searcHistory));
+            }
+
             _cacheList = state.list;
           }
 
