@@ -18,6 +18,8 @@ import 'package:astronomy_picture/features/apod/domain/usecases/apod_is_save.dar
     as _i14;
 import 'package:astronomy_picture/features/apod/domain/usecases/fetch_apod.dart'
     as _i12;
+import 'package:astronomy_picture/features/apod/domain/usecases/fetch_search_history.dart'
+    as _i19;
 import 'package:astronomy_picture/features/apod/domain/usecases/get_all_apod_save.dart'
     as _i15;
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_by_date_range.dart'
@@ -32,6 +34,8 @@ import 'package:astronomy_picture/features/apod/domain/usecases/remove_save_apod
     as _i16;
 import 'package:astronomy_picture/features/apod/domain/usecases/save_apod.dart'
     as _i18;
+import 'package:astronomy_picture/features/apod/domain/usecases/update_search_history.dart'
+    as _i20;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -472,4 +476,94 @@ class MockSaveApod extends _i1.Mock implements _i18.SaveApod {
           ),
         )),
       ) as _i6.Future<_i3.Either<_i7.Failure, _i17.SuccessReturn>>);
+}
+
+/// A class which mocks [FetchSearchHistory].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFetchSearchHistory extends _i1.Mock
+    implements _i19.FetchSearchHistory {
+  @override
+  _i4.ApodLocalRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i4.ApodLocalRepository);
+  @override
+  _i6.Future<_i3.Either<_i7.Failure, List<String>>> call(
+          _i9.NoParameter? parameter) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [parameter],
+        ),
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, List<String>>>.value(
+            _FakeEither_1<_i7.Failure, List<String>>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i3.Either<_i7.Failure, List<String>>>.value(
+                _FakeEither_1<_i7.Failure, List<String>>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<String>>>);
+}
+
+/// A class which mocks [UpdateSearchHistory].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUpdateSearchHistory extends _i1.Mock
+    implements _i20.UpdateSearchHistory {
+  @override
+  _i4.ApodLocalRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+        returnValueForMissingStub: _FakeApodLocalRepository_2(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i4.ApodLocalRepository);
+  @override
+  _i6.Future<_i3.Either<_i7.Failure, List<String>>> call(
+          List<String>? parameter) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [parameter],
+        ),
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, List<String>>>.value(
+            _FakeEither_1<_i7.Failure, List<String>>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i3.Either<_i7.Failure, List<String>>>.value(
+                _FakeEither_1<_i7.Failure, List<String>>(
+          this,
+          Invocation.method(
+            #call,
+            [parameter],
+          ),
+        )),
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<String>>>);
 }

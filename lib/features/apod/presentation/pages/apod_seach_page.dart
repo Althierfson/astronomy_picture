@@ -13,12 +13,21 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 class ApodSeachPage extends SearchDelegate {
   PickerDateRange choosedDate = PickerDateRange(DateTime.now(), DateTime.now());
   late ApodBloc _apodBloc;
+  late ApodBloc _apodBlocHistory;
   String _cacheQuery = "";
   List<Apod> _cacheList = [];
+  List<String> _searcHistory = [];
   final StreamController<ApodState> _stream = StreamController.broadcast();
 
   ApodSeachPage() {
     _apodBloc = getIt<ApodBloc>();
+    _apodBlocHistory = getIt<ApodBloc>();
+    _apodBlocHistory.input.add(GetHistorySearchApodEvent());
+    _apodBlocHistory.stream.listen((event) {
+      if (event is SuccessHistorySearchListApodState) {
+        _searcHistory = event.list;
+      }
+    });
     _apodBloc.stream.listen((event) {
       _stream.add(event);
     });
@@ -71,7 +80,6 @@ class ApodSeachPage extends SearchDelegate {
                           query = DateConvert.dateToString(
                               dateRange.startDate ?? DateTime(2023));
                         }
-                        buildResults(context);
                       }
                       Navigator.pop(context);
                     },
@@ -137,6 +145,9 @@ class ApodSeachPage extends SearchDelegate {
           }
 
           if (state is SuccessListApodState) {
+            _searcHistory.add(query);
+            _apodBlocHistory.input
+                .add(UpdateHistorySearchApodEvent(list: _searcHistory));
             _cacheList = state.list;
           }
 
@@ -176,22 +187,73 @@ class ApodSeachPage extends SearchDelegate {
       color: PersonalTheme.spaceBlue,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  border:
-                      Border.all(color: PersonalTheme.white.withOpacity(.7))),
-              child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  width: double.infinity,
-                  child: Center(
-                    child: Text(
-                      "single day: YYYY-MM-DD\nrange of days: YYYY-MM-DD/YYYY-MM-DD\nOr tap the calendar icon! Is much better",
-                      style: TextStyle(color: PersonalTheme.white),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: PersonalTheme.white.withOpacity(.7))),
+                  child: Container(
+                      padding: const EdgeInsets.all(10.0),
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          "Single day: YYYY-MM-DD\nRange of days: YYYY-MM-DD/YYYY-MM-DD\nOr tap the calendar icon! Is much better",
+                          style: TextStyle(color: PersonalTheme.white),
+                        ),
+                      )),
+                ),
+              )
+            ],
+          ),
+          StreamBuilder(
+            stream: _stream.stream,
+            builder: (context, snapshot) {
+              ApodState? state = snapshot.data;
+
+              if (state is LoadingApodState) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              if (state is ErrorApodState) {
+                return Center(
+                  child: ErrorApodWidget(
+                    msg: state.msg,
+                  ),
+                );
+              }
+
+              if (state is SuccessHistorySearchListApodState) {
+                _searcHistory = state.list;
+              }
+
+              return Expanded(
+                  child: ListView.builder(
+                itemCount: _searcHistory.length,
+                itemBuilder: (context, index) => ListTile(
+                  trailing: IconButton(
+                    icon: Icon(
+                      Icons.delete,
+                      color: PersonalTheme.white,
                     ),
-                  )),
-            ),
+                    onPressed: () {
+                      _searcHistory.removeAt(index);
+                      _apodBloc.input.add(
+                          UpdateHistorySearchApodEvent(list: _searcHistory));
+                    },
+                  ),
+                  title: Text(
+                    _searcHistory[index],
+                    style: TextStyle(color: PersonalTheme.white),
+                  ),
+                  onTap: () => query = _searcHistory[index],
+                ),
+              ));
+            },
           )
         ],
       ),

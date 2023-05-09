@@ -103,4 +103,50 @@ void main() {
       expect(result, Left<Failure, List<Apod>>(AccessLocalDataFailure()));
     });
   });
+
+  group('function fetchSearchHistory', () {
+    test("Should return a List of String on the Right side of Either",
+        () async {
+      when(localDataSource.getSearchHistory())
+          .thenAnswer((_) async => tHistoryList());
+
+      final result = await repository.fetchSearchHistory();
+
+      result.fold((l) => fail("Test Failed"), (r) => expect(r, tHistoryList()));
+    });
+
+    test(
+        "Should return an Failure throw by remoteDataDource on the Lefth side of Either",
+        () async {
+      when(localDataSource.getSearchHistory())
+          .thenThrow(AccessLocalDataFailure());
+
+      final result = await repository.fetchSearchHistory();
+
+      expect(result, Left<Failure, List<String>>(AccessLocalDataFailure()));
+    });
+  });
+
+  group('function updateSearchHistory', () {
+    test("Should return a List of String on the Right side of Either",
+        () async {
+      when(localDataSource.updateSearchHistory(any))
+          .thenAnswer((_) async => tHistoryList());
+
+      final result = await repository.updateSearchHistory(tHistoryList());
+
+      result.fold((l) => fail("Test Failed"), (r) => expect(r, tHistoryList()));
+    });
+
+    test(
+        "Should return an Failure throw by remoteDataDource on the Lefth side of Either",
+        () async {
+      when(localDataSource.updateSearchHistory(any))
+          .thenThrow(AccessLocalDataFailure());
+
+      final result = await repository.updateSearchHistory(tHistoryList());
+
+      expect(result, Left<Failure, List<String>>(AccessLocalDataFailure()));
+    });
+  });
 }

@@ -55,3 +55,12 @@ class IsSaveApodState extends ApodState {
   @override
   List<Object> get props => [wasSave];
 }
+
+class SuccessHistorySearchListApodState extends ApodState {
+  final List<String> list;
+
+  const SuccessHistorySearchListApodState({required this.list});
+
+  @override
+  List<Object> get props => [list];
+}

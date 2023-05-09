@@ -144,4 +144,55 @@ class MockApodLocalRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, List<_i7.Apod>>>);
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<String>>> updateSearchHistory(
+          List<String>? historyList) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateSearchHistory,
+          [historyList],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, List<String>>>.value(
+            _FakeEither_0<_i5.Failure, List<String>>(
+          this,
+          Invocation.method(
+            #updateSearchHistory,
+            [historyList],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, List<String>>>.value(
+                _FakeEither_0<_i5.Failure, List<String>>(
+          this,
+          Invocation.method(
+            #updateSearchHistory,
+            [historyList],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<String>>>);
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<String>>> fetchSearchHistory() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchSearchHistory,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, List<String>>>.value(
+            _FakeEither_0<_i5.Failure, List<String>>(
+          this,
+          Invocation.method(
+            #fetchSearchHistory,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, List<String>>>.value(
+                _FakeEither_0<_i5.Failure, List<String>>(
+          this,
+          Invocation.method(
+            #fetchSearchHistory,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<String>>>);
 }

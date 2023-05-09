@@ -2,6 +2,7 @@ import 'package:astronomy_picture/core/failure.dart';
 import 'package:astronomy_picture/core/success_return.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/apod_is_save.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/fetch_apod.dart';
+import 'package:astronomy_picture/features/apod/domain/usecases/fetch_search_history.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_all_apod_save.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_by_date_range.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/get_apod_from_date.dart';
@@ -9,6 +10,7 @@ import 'package:astronomy_picture/features/apod/domain/usecases/get_random_apod.
 import 'package:astronomy_picture/features/apod/domain/usecases/get_today_apod.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/remove_save_apod.dart';
 import 'package:astronomy_picture/features/apod/domain/usecases/save_apod.dart';
+import 'package:astronomy_picture/features/apod/domain/usecases/update_search_history.dart';
 import 'package:astronomy_picture/features/apod/presentation/bloc/apod_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -28,6 +30,8 @@ import 'apod_bloc_test.mocks.dart';
   MockSpec<GetAllApodSave>(),
   MockSpec<RemoveSaveApod>(),
   MockSpec<SaveApod>(),
+  MockSpec<FetchSearchHistory>(),
+  MockSpec<UpdateSearchHistory>(),
 ])
 void main() {
   late MockGetTodayApod getTodayApod;
@@ -39,6 +43,8 @@ void main() {
   late MockGetAllApodSave getAllApodSave;
   late MockRemoveSaveApod removeSaveApod;
   late MockSaveApod saveApod;
+  late MockFetchSearchHistory fetchSearchHistory;
+  late MockUpdateSearchHistory updateSearchHistory;
   late ApodBloc apodBloc;
 
   setUp(() {
@@ -51,6 +57,8 @@ void main() {
     getAllApodSave = MockGetAllApodSave();
     removeSaveApod = MockRemoveSaveApod();
     saveApod = MockSaveApod();
+    fetchSearchHistory = MockFetchSearchHistory();
+    updateSearchHistory = MockUpdateSearchHistory();
     apodBloc = ApodBloc(
         getTodayApod: getTodayApod,
         getRandomApod: getRandomApod,
@@ -60,7 +68,9 @@ void main() {
         apodIsSave: apodIsSave,
         getAllApodSave: getAllApodSave,
         removeSaveApod: removeSaveApod,
-        saveApod: saveApod);
+        saveApod: saveApod,
+        fetchSearchHistory: fetchSearchHistory,
+        updateSearchHistory: updateSearchHistory);
   });
 
   final tSuccessStremList = [
@@ -304,8 +314,7 @@ void main() {
 
   group("usecase - saveApod", () {
     test("Should emit LoadingApodState and LocalAccessSuccessApodState", () {
-      when(saveApod(any))
-          .thenAnswer((_) async => Right(ApodSave()));
+      when(saveApod(any)).thenAnswer((_) async => Right(ApodSave()));
 
       apodBloc.input.add(SaveApodEvent(apod: tApod()));
 
@@ -322,6 +331,68 @@ void main() {
           .thenAnswer((_) async => Left(AccessLocalDataFailure()));
 
       apodBloc.input.add(SaveApodEvent(apod: tApod()));
+
+      expect(
+          apodBloc.stream,
+          emitsInOrder([
+            LoadingApodState(),
+            ErrorApodState(msg: AccessLocalDataFailure().msg)
+          ]));
+    });
+  });
+
+  group("usecase - fetchSearchHistory", () {
+    test("Should emit LoadingApodState and SuccessHistorySearchListApodState",
+        () {
+      when(fetchSearchHistory(any))
+          .thenAnswer((_) async => Right(tHistoryList()));
+
+      apodBloc.input.add(GetHistorySearchApodEvent());
+
+      expect(
+          apodBloc.stream,
+          emitsInOrder([
+            LoadingApodState(),
+            SuccessHistorySearchListApodState(list: tHistoryList())
+          ]));
+    });
+
+    test("Should emit LoadingApodState and ErrorApodState", () {
+      when(fetchSearchHistory(any))
+          .thenAnswer((_) async => Left(AccessLocalDataFailure()));
+
+      apodBloc.input.add(GetHistorySearchApodEvent());
+
+      expect(
+          apodBloc.stream,
+          emitsInOrder([
+            LoadingApodState(),
+            ErrorApodState(msg: AccessLocalDataFailure().msg)
+          ]));
+    });
+  });
+
+  group("usecase - updateSearchHistory", () {
+    test("Should emit LoadingApodState and SuccessHistorySearchListApodState",
+        () {
+      when(updateSearchHistory(any))
+          .thenAnswer((_) async => Right(tHistoryList()));
+
+      apodBloc.input.add(UpdateHistorySearchApodEvent(list: tHistoryList()));
+
+      expect(
+          apodBloc.stream,
+          emitsInOrder([
+            LoadingApodState(),
+            SuccessHistorySearchListApodState(list: tHistoryList())
+          ]));
+    });
+
+    test("Should emit LoadingApodState and ErrorApodState", () {
+      when(updateSearchHistory(any))
+          .thenAnswer((_) async => Left(AccessLocalDataFailure()));
+
+      apodBloc.input.add(UpdateHistorySearchApodEvent(list: tHistoryList()));
 
       expect(
           apodBloc.stream,
