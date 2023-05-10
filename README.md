@@ -64,7 +64,7 @@ The project has the following structure:
 ## Tests
 The project follows a TDD approach, with unit tests in all layers. Tests can be found in the test directory.
 
-## Limitações atuais
+## Current Limitations
 Esse projeto foi configurado e unicamente testado em ambientes android.
 
 ## Author

@@ -28,6 +28,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^21.2.3
   shared_preferences: ^2.1.0
   gallery_saver: ^2.3.2
+  share_plus: ^6.3.4
 
 dev_dependencies:
   flutter_test:
