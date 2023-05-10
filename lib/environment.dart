@@ -6,5 +6,5 @@
 // When you got your key change the get api Key from DEMO_KEY to your own key
 
 class Environment {
-  static String get apidKey => "em690XssAjFmYIwEKVfMAvfkQecFSQpPfwetfvua";
+  static String get apidKey => "DEMO_KEY";
 }
