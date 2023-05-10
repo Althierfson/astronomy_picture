@@ -296,7 +296,7 @@ class _ApodViewPageState extends State<ApodViewPage> {
       GallerySaver.saveImage(_apod.hdurl ?? _apod.url).then((value) {
         if (value == true) {
           setState(() {
-            showSnackBar("Image save on Gallery");
+            showSnackBar("Image Save on Gallery");
           });
         }
       });
