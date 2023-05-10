@@ -7,6 +7,7 @@ import 'package:astronomy_picture/features/apod/presentation/widgets/apod_video.
 import 'package:astronomy_picture/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ApodViewPage extends StatefulWidget {
@@ -37,6 +38,16 @@ class _ApodViewPageState extends State<ApodViewPage> {
         appBar: AppBar(
           backgroundColor: PersonalTheme.spaceBlue.withOpacity(0.0),
           elevation: 0,
+          actions: [
+            PopupMenuButton(
+              icon: Icon(
+                Icons.more_vert,
+                color: PersonalTheme.white,
+              ),
+              color: PersonalTheme.black,
+              itemBuilder: (context) => buildMenuButton(),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
             child: Container(
@@ -278,5 +289,31 @@ class _ApodViewPageState extends State<ApodViewPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
     });
+  }
+
+  void saveOnGallery() {
+    if (_apod.mediaType == "image") {
+      GallerySaver.saveImage(_apod.hdurl ?? _apod.url).then((value) {
+        if (value == true) {
+          setState(() {
+            showSnackBar("Image Save on Gallery");
+          });
+        }
+      });
+    }
+  }
+
+  List<PopupMenuItem> buildMenuButton() {
+    List<PopupMenuItem> list = [];
+
+    if (_apod.mediaType == "image") {
+      list.add(PopupMenuItem(
+        textStyle: TextStyle(color: PersonalTheme.white),
+        onTap: saveOnGallery,
+        child: const Text('Save on Galerry'),
+      ));
+    }
+
+    return list;
   }
 }

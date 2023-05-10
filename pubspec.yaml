@@ -27,6 +27,7 @@ dependencies:
   flutter_native_timezone: ^2.0.0
   syncfusion_flutter_datepicker: ^21.2.3
   shared_preferences: ^2.1.0
+  gallery_saver: ^2.3.2
 
 dev_dependencies:
   flutter_test:
