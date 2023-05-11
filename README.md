@@ -38,6 +38,8 @@ The APP is able of:
 - Allow the user to search for specific content based on a day or period;
 - Show daily notification inviting user to visit APP;
 - Allow the user to save locally the content he likes;
+- Allow the user save on your own gallery the picture they like;
+- Allow the user to share the content with friends;
 
 ## how to run
 1. Clone the repository;
