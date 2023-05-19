@@ -14,7 +14,7 @@ You can also see random images and, if you want, you can see which were the feat
   <img src="https://user-images.githubusercontent.com/42945474/236709169-e1f29a49-3b81-4f7c-aa29-5d985257d59e.jpg", width="250px"/>
 </div>
 
-## Acesse o APP
+## Access the APP
 Play Store link: [Astronomy Picture](https://play.google.com/store/apps/details?id=com.cajuapps.astronomy_picture)
 
 ## About this project (Technical)
@@ -67,7 +67,7 @@ The project has the following structure:
 The project follows a TDD approach, with unit tests in all layers. Tests can be found in the test directory.
 
 ## Current Limitations
-Esse projeto foi configurado e unicamente testado em ambientes android.
+This project was configured and tested exclusively in android environments.
 
 ## Author
 Althierfson Tullio
@@ -75,7 +75,7 @@ Althierfson Tullio
 ## License
 This project is licensed under the MIT license. See the LICENSE file for more information.
 
-## Informações Importantes
+## important informations
 This app is a platform that uses NASA's APOD API to display amazing images and videos from outer space.
 
 It is important to emphasize that NASA has no relationship with the application, since the information is provided openly and freely for anyone who wants to access it through the API.
