@@ -1,5 +1,5 @@
 import 'package:astronomy_picture/container_injection.dart';
-import 'package:astronomy_picture/core/util/notifications.dart';
+import 'package:astronomy_picture/data/datasources/notifications/notifications.dart';
 import 'package:astronomy_picture/route_generato.dart';
 import 'package:astronomy_picture/theme.dart';
 import 'package:flutter/material.dart';

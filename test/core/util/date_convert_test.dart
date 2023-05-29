@@ -1,5 +1,5 @@
 import 'package:astronomy_picture/core/failure.dart';
-import 'package:astronomy_picture/core/util/date_convert.dart';
+import 'package:astronomy_picture/core/date_convert.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
