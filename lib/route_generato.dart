@@ -1,10 +1,9 @@
-import 'package:astronomy_picture/core/pages/about_app.dart';
-import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
-import 'package:astronomy_picture/features/apod/presentation/pages/apod_date_page.dart';
-import 'package:astronomy_picture/features/apod/presentation/pages/apod_list_page.dart';
-import 'package:astronomy_picture/features/apod/presentation/pages/apod_save_page.dart';
-import 'package:astronomy_picture/features/apod/presentation/pages/apod_today_page.dart';
-import 'package:astronomy_picture/features/apod/presentation/pages/apod_view_page.dart';
+import 'package:astronomy_picture/presentation/pages/core/about_app.dart';
+import 'package:astronomy_picture/domain/entities/apod.dart';
+import 'package:astronomy_picture/presentation/pages/fetch_apod/apod_list_page.dart';
+import 'package:astronomy_picture/presentation/pages/bookmark_apod/bookmark_apod_page.dart';
+import 'package:astronomy_picture/presentation/pages/today_apod/apod_today_page.dart';
+import 'package:astronomy_picture/presentation/pages/core/apod_view_page.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerato {
@@ -16,7 +15,7 @@ class RouteGenerato {
   Widget Function(BuildContext) _mapRouteName(String? name, Object? args) {
     switch (name) {
       case '/':
-        return (_) => const ApodListPage();
+        return (_) => const FetchApodPage();
       case '/apodView':
         if (args is Apod) {
           return (_) => ApodViewPage(apod: args);
@@ -25,12 +24,10 @@ class RouteGenerato {
         }
       case '/apodToday':
         return (_) => const ApodTodayPage();
-      case '/apodDate':
-        return (_) => const ApodDatePage();
       case '/aboutApp':
         return (_) => const AboutAppPage();
       case '/apodSave':
-        return (_) => const ApodSavePage();
+        return (_) => const BookmarkApodPage();
       default:
         return (_) => _errorPage();
     }

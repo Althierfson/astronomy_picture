@@ -1,5 +1,5 @@
-import 'package:astronomy_picture/features/apod/data/models/apod_model.dart';
-import 'package:astronomy_picture/features/apod/domain/entities/apod.dart';
+import 'package:astronomy_picture/data/models/apod_model.dart';
+import 'package:astronomy_picture/domain/entities/apod.dart';
 
 Apod Function() tApod = () => Apod(
     copyright: "Stefan Seip",
