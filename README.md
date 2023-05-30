@@ -28,6 +28,7 @@ Technologies used:
 - Clean Architecture
 - Bloc
 - API REST
+- Dependency injection
 
 
 ## Functionalities
@@ -58,10 +59,9 @@ The project has the following structure:
 
 - lib: main directory;
   - core: directory with genral features
-  - features: directory with all project features, all with:
-    - data: infrastructure layer, with all repositories classes and API service;
-    - domain: domínio layer, with all entities, business rules, and repositories interface;
-    - presentation: application layer, with all presentations classes, views and blocs;
+  - data: infrastructure layer, with all repositories classes and API service;
+  - domain: domínio layer, with all entities, business rules, and repositories interface;
+  - presentation: application layer, with all presentations classes, views and blocs;
 
 ## Tests
 The project follows a TDD approach, with unit tests in all layers. Tests can be found in the test directory.
