@@ -16,8 +16,8 @@ class ApodVideo extends StatefulWidget {
 class _ApodVideoState extends State<ApodVideo> {
   late String url;
   late bool showOptions;
-  late VideoPlayerController _videoController;
-  late YoutubePlayerController _youtubeController;
+  VideoPlayerController? _videoController;
+  YoutubePlayerController? _youtubeController;
   VideoPlataform videoPlataform = VideoPlataform.stand;
 
   @override
@@ -30,7 +30,8 @@ class _ApodVideoState extends State<ApodVideo> {
 
   @override
   void dispose() {
-    _videoController.dispose();
+    if (_videoController != null) _videoController!.dispose();
+    if (_youtubeController != null) _youtubeController!.dispose();
     super.dispose();
   }
 
@@ -61,21 +62,21 @@ class _ApodVideoState extends State<ApodVideo> {
   Widget buildVideoPlayer() {
     Widget videoWidget;
     if (videoPlataform == VideoPlataform.youtube) {
-      videoWidget = YoutubePlayer(controller: _youtubeController);
+      videoWidget = YoutubePlayer(controller: _youtubeController!);
     } else if (videoPlataform == VideoPlataform.vimeo) {
       videoWidget = VimeoVideoPlayer(
         url: url,
         autoPlay: true,
       );
     } else {
-      if (_videoController.value.hasError) {
+      if (_videoController!.value.hasError) {
         videoWidget = const Text(
             "Sorry! We can't play this video. Try open in your browser");
       } else {
-        videoWidget = _videoController.value.isInitialized
+        videoWidget = _videoController!.value.isInitialized
             ? AspectRatio(
-                aspectRatio: _videoController.value.aspectRatio,
-                child: VideoPlayer(_videoController),
+                aspectRatio: _videoController!.value.aspectRatio,
+                child: VideoPlayer(_videoController!),
               )
             : Container();
       }
